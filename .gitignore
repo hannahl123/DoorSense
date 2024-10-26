@@ -1,0 +1,13 @@
+# folders
+.cache/
+.vscode/
+bin/
+*/bin/
+node_modules/
+
+# files
+.DS_Store
+compile_commands.json
+package-lock.json
+
+#extensions
