@@ -10,9 +10,10 @@ export default function RootLayout() {
         tabBarStyle: {
           height: '12%', 
           paddingTop: '3%', 
-          marginBottom: '3%',
+          marginBottom: '4%',
           marginHorizontal: '5%', 
-          borderTopWidth: 0,
+          borderTopWidth: 1,
+          borderColor: Colors.light.background,
         },
         tabBarLabelStyle: {
           paddingTop: '3%',

@@ -1,16 +1,17 @@
 import React from "react";
 import { Text, View } from "react-native";
+import { useTextStyles } from "@/constants/textStyles";
 
 export default function Recent() {
+    const styles = useTextStyles();
+
     return (
         <View
-            style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-            }}
+            style={styles.view}
         >
-            <Text>RECENT</Text>
+            <Text style={styles.title}>RECENT</Text>
+            <Text style={styles.header}>Filter</Text>
+
         </View>
     );
 }
