@@ -1,5 +1,8 @@
 // https://www.youtube.com/watch?reload=9&app=desktop&v=nnoDqfAYlB0
+// https://www.youtube.com/watch?v=-ZyFYniGUsw
 python -m venv venv/
-venv/scripts/activate.ps1
+venv/scripts/activate.ps1 (WINDOWS)
+source venv/scripts/activate (UNIX)
 pip install --no-dependencies tflite-model-maker
-pip install --no-dependencies tflite-support
+pip install tflite-model-maker
+pip install tensorflow
