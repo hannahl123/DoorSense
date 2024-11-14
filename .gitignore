@@ -4,6 +4,8 @@
 bin/
 */bin/
 node_modules/
+venv/
+*/venv/
 
 # files
 .DS_Store
