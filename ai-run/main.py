@@ -2,16 +2,19 @@ import os
 import pathlib
 
 # setup
+dir = os.path.dirname(__file__)
+interpreter = None
 def is_raspPI(): return pathlib.Path("/etc/rpi-issue").exists()
 print("Is Raspberry PI: "+str(is_raspPI()))
 if is_raspPI():
     import tflite_runtime.interpreter as tfl_interpreter
-else:
+    interpreter = tfl_interpreter.Interpreter(dir+"/model/parcel_detection.lite")
+else:   
     import numpy as np
     import tensorflow as tf
+    interpreter = tf.lite.Interpreter(dir+"/model/parcel_detection.lite")
 
-dir = os.path.dirname(__file__)
-interpreter = tf.lite.Interpreter(dir+"/model/parcel_detection.lite")
+# allocate tensors
 interpreter.allocate_tensors()
 
 # get input and output tensors
