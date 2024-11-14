@@ -13,3 +13,7 @@ pip install --no-dependencies tflite-model-maker (maybe doesn't work)
 pip install tflite-model-maker (maybe doesn't work)
 pip install tensorflow (on computer)
 pip install tflite-runtime (on edge device)
+
+Possible Datasets:
+- https://studio.edgeimpulse.com/public/103841/latest
+- https://www.kaggle.com/datasets/jcoral02/inriaperson
