@@ -25,6 +25,8 @@ export const useTextStyles = () => {
             fontWeight: 'bold', 
             color: Colors.light.text, 
             marginBottom: '10%', 
+            position: 'absolute', 
+            top: '15%',
         }, 
         header: {
             fontSize: 18, 
@@ -56,6 +58,10 @@ export const useTextStyles = () => {
             color: Colors.light.text,
             marginTop: -4,
             fontSize: 24, 
+        },
+        body: {
+            color: Colors.light.text,
+            fontSize: 15,
         }
     })
 }

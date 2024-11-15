@@ -1,71 +1,28 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { Tabs, Stack } from "expo-router";
 import { Colors } from "../constants/Colors";
 
 export default function RootLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false, 
-        tabBarStyle: {
-          height: '12%', 
-          paddingTop: '3%', 
-          marginBottom: '4%',
-          marginHorizontal: '5%', 
-          borderTopWidth: 1,
-          borderColor: Colors.light.background,
-        },
-        tabBarLabelStyle: {
-          paddingTop: '3%',
-          fontSize: 13, 
-          fontWeight: 500,
-        }, 
-        tabBarIconStyle: {
-          paddingBottom: '3%',
-        },
-        tabBarActiveTintColor: Colors.light.background, 
-        tabBarInactiveTintColor: Colors.light.text, 
-      }}
+    <Stack
+        screenOptions={{
+            headerShown: false,
+        }}
     >
-      <Tabs.Screen
-        name="index" 
-        options={{
-          title: 'HOME',
-          tabBarIcon: ({focused}) => (
-            <MaterialIcons 
-              name={'home'} 
-              color={focused ? '#52B69A' : '#1E6091'} 
-              size={35}
-            />
-          ), 
-        }}
-      />
-      <Tabs.Screen
-        name="recent" 
-        options={{
-          title: 'RECENT',
-          tabBarIcon: ({focused}) => (
-            <MaterialIcons 
-              name={'schedule'} 
-              color={focused ? '#52B69A' : '#1E6091'} 
-              size={35}
-            />
-          )
-        }}
-      />
-      <Tabs.Screen
-        name="settings" 
-        options={{
-          title: "SETTINGS", 
-          tabBarIcon: ({focused}) => (
-            <MaterialIcons 
-              name={'settings'} 
-              color={focused ? '#52B69A' : '#1E6091'} 
-              size={35}
-            />
-          ),
-        }}
-      />
-    </Tabs>
+        <Tabs.Screen 
+            name="(tabs)"
+            options={{
+                headerShown: false,
+            }}
+        />
+
+        <Tabs.Screen 
+            name="about" 
+            options={{
+                title: "ABOUT",
+                headerShown: true,
+            }}
+        />
+    </Stack>
   );
 }

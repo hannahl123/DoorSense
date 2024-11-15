@@ -13,13 +13,13 @@ export default function Index() {
       <Text style={styles.title}>DOORSENSE</Text>
       <Text style={styles.header}>LIVE</Text>
 
-      {/* <Video 
+      <Video 
         source={{uri: "https://www.w3schools.com/html/mov_bbb.mp4"}} 
         style={styles.video} 
         useNativeControls 
         isLooping
         onError={(e) => console.log('Error loading video:', e)}
-      /> */}
+      />
 
     </View>
   );
