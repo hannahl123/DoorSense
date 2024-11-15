@@ -18,3 +18,6 @@ pip install tflite-runtime (on edge device)
 Possible Datasets:
 - Parcel Detection: https://studio.edgeimpulse.com/public/103841/latest
 - Human Detection: https://www.kaggle.com/datasets/jcoral02/inriaperson
+
+Troubleshooting:
+- On Raspberry Pi, numpy may need to be downgraded to <2.0 to be compatible with opencv-python
