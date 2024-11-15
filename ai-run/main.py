@@ -5,11 +5,11 @@ import pathlib
 dir = os.path.dirname(__file__)
 interpreter = None
 def is_raspPI(): return pathlib.Path("/etc/rpi-issue").exists()
-print("Is Raspberry PI: "+str(is_raspPI()))
+print("Is Raspberry Pi: "+str(is_raspPI()))
 if is_raspPI():
     import tflite_runtime.interpreter as tfl_interpreter
     interpreter = tfl_interpreter.Interpreter(dir+"/model/parcel_detection.lite")
-else:   
+else:
     import numpy as np
     import tensorflow as tf
     interpreter = tf.lite.Interpreter(dir+"/model/parcel_detection.lite")

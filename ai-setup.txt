@@ -1,6 +1,6 @@
 Tutorials:
 - Tensorflow Lite: https://www.youtube.com/watch?reload=9&app=desktop&v=nnoDqfAYlB0
-- Model Training for Raspberry PI: https://www.youtube.com/watch?v=-ZyFYniGUsw
+- Model Training for Raspberry Pi: https://www.youtube.com/watch?v=-ZyFYniGUsw
 - ESP Camera: https://gpiocc.github.io/learn/raspberrypi/esp/ml/2020/11/08/martin-ku-stream-video-from-esp32-to-raspberry-pi.html
 
 Documentation:
