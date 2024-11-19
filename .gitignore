@@ -10,6 +10,5 @@ venv/
 # files
 .DS_Store
 compile_commands.json
-package-lock.json
 
 #extensions
