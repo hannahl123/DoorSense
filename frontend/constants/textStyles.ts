@@ -25,8 +25,6 @@ export const useTextStyles = () => {
             fontWeight: 'bold', 
             color: Colors.light.text, 
             marginBottom: '10%', 
-            position: 'absolute', 
-            top: '15%',
         }, 
         header: {
             fontSize: 18, 
@@ -57,11 +55,33 @@ export const useTextStyles = () => {
         settings_icon: {
             color: Colors.light.text,
             marginTop: -4,
-            fontSize: 24, 
+            marginRight: '3%', 
+            fontSize: 25, 
         },
         body: {
             color: Colors.light.text,
             fontSize: 15,
+        }, 
+        toggle: {
+            color: Colors.light.text, 
+            transform: [{ scale: 0.65}],
+            marginVertical: '-2%',
+            marginRight: '-2%', 
+        }, 
+        warning: {
+            paddingHorizontal: '5%',
+            color: Colors.light.text,
+            fontSize: 15, 
+            fontWeight: 'bold',
+        }, 
+        unread: {
+            paddingHorizontal: '3%', 
+            fontSize: 20,
+        }, 
+        filtericon: {
+            fontSize: 38,
+            paddingLeft: '10%',
+            color: Colors.light.text,
         }
     })
 }

@@ -9,20 +9,17 @@ export default function RootLayout() {
         headerShown: false, 
         tabBarStyle: {
           height: '14%', 
-          paddingTop: '5%', 
+          paddingTop: '3%', 
           paddingBottom: '3%',
           paddingHorizontal: '5%', 
           borderTopWidth: 1,
           borderColor: Colors.light.background,
         },
         tabBarLabelStyle: {
-          paddingTop: '3%',
+          marginTop: '10%',
           fontSize: 13, 
           fontWeight: 500,
         }, 
-        tabBarIconStyle: {
-          paddingBottom: '0%',
-        },
         tabBarActiveTintColor: Colors.light.background, 
         tabBarInactiveTintColor: Colors.light.text, 
       }}
@@ -35,7 +32,7 @@ export default function RootLayout() {
             <MaterialIcons 
               name={'home'} 
               color={focused ? '#52B69A' : '#1E6091'} 
-              size={35}
+              size={30}
             />
           ), 
         }}
@@ -48,7 +45,7 @@ export default function RootLayout() {
             <MaterialIcons 
               name={'schedule'} 
               color={focused ? '#52B69A' : '#1E6091'} 
-              size={35}
+              size={30}
             />
           )
         }}
@@ -61,7 +58,7 @@ export default function RootLayout() {
             <MaterialIcons 
               name={'settings'} 
               color={focused ? '#52B69A' : '#1E6091'} 
-              size={35}
+              size={30}
             />
           ),
         }}

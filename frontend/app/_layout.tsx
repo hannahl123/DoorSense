@@ -13,13 +13,14 @@ export default function RootLayout() {
             name="(tabs)"
             options={{
                 headerShown: false,
+                title: "Back",
             }}
         />
 
         <Tabs.Screen 
             name="about" 
             options={{
-                title: "ABOUT",
+                title: " ",
                 headerShown: true,
             }}
         />

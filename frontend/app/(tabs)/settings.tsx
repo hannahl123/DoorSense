@@ -1,5 +1,5 @@
-import React from "react";
-import { Pressable, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { Pressable, Text, View, Switch, TouchableOpacity } from 'react-native';
 import { useTextStyles } from "@/constants/textStyles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Colors } from "../../constants/Colors";
@@ -12,34 +12,44 @@ export default function Settings() {
         console.log('Button pressed');
         router.push('/about');
     }
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled((prevState) => !prevState);
 
     return (
         <View
             style={styles.view}
         >
             <Text style={styles.title}>SETTINGS</Text>
-            <View style={[styles.rect, {
-                marginTop: '35%',
-            }]}>
+            <View style={[styles.rect, {flexDirection: 'row', justifyContent: 'space-between'}]}>
                 <Text style={styles.optionText}>PUSH NOTIFICATIONS</Text>
-                <MaterialIcons
-                    name="settings"
-                    style={styles.settings_icon}
+                <Switch
+                    trackColor={{ false: Colors.light.background, true: Colors.light.text }} // Customize colors
+                    thumbColor={isEnabled ? "#FFF" : "#fff"} // Customize thumb color
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={toggleSwitch}
+                    value={isEnabled}
+                    style={styles.toggle}
                 />
             </View>
             <View style={styles.rect}>
                 <Text style={styles.optionText}>DELETE ALL HISTORY</Text>
-                <MaterialIcons
-                    name="delete"
-                    style={styles.settings_icon}
-                />
+                <TouchableOpacity onPress={() => alert('Deleted all previous history.')}>
+                    <MaterialIcons
+                        name="delete"
+                        style={styles.settings_icon}
+                    />
+                </TouchableOpacity>
+
             </View>
             <View style={styles.rect}>
                 <Text style={styles.optionText}>DARK MODE</Text>
-                <MaterialIcons
+                <TouchableOpacity onPress={() => alert('Coming later...')}>
+                    <MaterialIcons
                     name="contrast"
                     style={styles.settings_icon}
                 />
+                </TouchableOpacity>
+                
             </View>
             <Pressable onPress={handlePress}>
                 <View style={styles.rect}>
