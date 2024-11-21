@@ -5,6 +5,7 @@ Tutorials:
 
 Documentation:
 - TFLite Runtime: https://ai.google.dev/edge/litert/inference
+- Basic IO: https://projects.raspberrypi.org/en/projects/physical-computing/0
 
 Setup Commands:
 python -m venv venv/
