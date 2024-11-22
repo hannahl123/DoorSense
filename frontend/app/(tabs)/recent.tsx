@@ -242,7 +242,9 @@ export default function Recent() {
                 }}
               />
             )}
-            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
               <TouchableOpacity style={styles.button} onPress={applyFilters}>
                 <Text style={styles.buttonText}>Apply Filters</Text>
               </TouchableOpacity>
