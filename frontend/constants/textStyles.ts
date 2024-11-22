@@ -70,10 +70,6 @@ export const useTextStyles = () => {
       fontSize: 18,
       fontWeight: "bold",
     },
-    unread: {
-      paddingHorizontal: "3%",
-      fontSize: 20,
-    },
     filtericon: {
       fontSize: 38,
       paddingLeft: "10%",
@@ -84,8 +80,9 @@ export const useTextStyles = () => {
       paddingHorizontal: 16,
       paddingVertical: 8,
       backgroundColor: "#fff",
-      marginTop: "10%",
+      marginTop: "30%",
       maxHeight: "75%",
+      width: '100%'
     },
     notification: {
       flexDirection: "row",
@@ -107,6 +104,8 @@ export const useTextStyles = () => {
       height: 10,
       backgroundColor: Colors.light.background,
       borderRadius: 5,
+      marginRight: 15,
+      marginTop: 4
     },
     modalOverlay: {
       flex: 1,
@@ -118,15 +117,16 @@ export const useTextStyles = () => {
       width: "80%",
       backgroundColor: "#fff",
       borderRadius: 10,
-      padding: 16,
+      padding: '5%',
       alignItems: "center",
       elevation: 5,
+      height: '50%'
     },
     modalTitle: {
       color: Colors.light.text,
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: "bold",
-      marginBottom: 8,
+      marginBottom: '5%',
     },
     modalDetails: {
       color: Colors.light.text,
@@ -134,10 +134,16 @@ export const useTextStyles = () => {
       marginBottom: 8,
       textAlign: "center",
     },
+    modalImage: {
+      width: "100%", 
+      height: '60%', 
+      borderRadius: '4%', 
+    }, 
     modalDate: {
       fontSize: 14,
       color: Colors.light.text,
-      marginBottom: 16,
+      marginTop: '6%',
+      marginBottom: '3%'
     },
     modalActions: {
       flexDirection: "row",
@@ -170,7 +176,7 @@ export const useTextStyles = () => {
     checkbox: {
       flexDirection: "row",
       alignItems: "center",
-      marginVertical: 10,
+      marginVertical: '3%',
     },
     checkboxIcon: {
       fontSize: 24,

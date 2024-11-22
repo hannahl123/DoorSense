@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, TouchableOpacity, ScrollView, Modal } from "react-native";
+import { Text, View, TouchableOpacity, ScrollView, Modal, Image } from "react-native";
 import { useTextStyles } from "@/constants/textStyles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Colors } from "@/constants/Colors";
@@ -10,40 +10,54 @@ export default function Recent() {
 
   type Notification = {
     title: string;
-    details: string;
+    details: string | null;
+    imageUrl: string | null;
     date: string;
     hasExclamation: boolean;
     hasDot: boolean;
+    isWeather: boolean;
   };
 
   const initialNotifications: Notification[] = [
     {
-      title: "Notification 1",
-      details: "This is the first notification.",
+      title: "Intruder detected",
+      details: null,
+      imageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewZsKrVeHBvxcN-xEFaQOoHfjc9Z-AsgIOw&s",
       date: "2024-11-21",
       hasExclamation: true,
       hasDot: true,
+      isWeather: false,
     },
     {
-      title: "Notification 2",
-      details: "This is the second notification.",
+      title: "Door opened",
+      details: null,
+      imageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewZsKrVeHBvxcN-xEFaQOoHfjc9Z-AsgIOw&s",
       date: "2024-11-20",
       hasExclamation: true,
       hasDot: false,
+      isWeather: false,
     },
     {
-      title: "Notification 3",
-      details: "This is the third notification.",
+      title: "Parcel delivered at door",
+      details: null,
+      imageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewZsKrVeHBvxcN-xEFaQOoHfjc9Z-AsgIOw&s",
       date: "2024-11-19",
       hasExclamation: false,
       hasDot: true,
+      isWeather: false,
     },
     {
-      title: "Notification 4",
-      details: "This is the fourth notification.",
+      title: "Rain starting at 10:00 AM today",
+      details: null,
+      imageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewZsKrVeHBvxcN-xEFaQOoHfjc9Z-AsgIOw&s",
       date: "2024-11-18",
       hasExclamation: false,
       hasDot: false,
+      isWeather: true,
     },
   ];
 
@@ -52,8 +66,12 @@ export default function Recent() {
   const [selectedNotification, setSelectedNotification] =
     useState<Notification | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
+
+  // Filters
   const [filterModalVisible, setFilterModalVisible] = useState(false);
+  const [importantFilter, setImportantFilter] = useState(false);
   const [unreadFilter, setUnreadFilter] = useState(false);
+  const [weatherFilter, setWeatherFilter] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [showStartPicker, setShowStartPicker] = useState(false);
@@ -88,10 +106,28 @@ export default function Recent() {
   const applyFilters = () => {
     let filteredNotifications = initialNotifications;
 
-    // Filter unread notifications
-    if (unreadFilter) {
+    if (importantFilter && unreadFilter) {
+      filteredNotifications = filteredNotifications.filter(
+        (notification) => notification.hasExclamation || notification.hasDot
+      );
+    } else if (weatherFilter && unreadFilter) {
+      filteredNotifications = filteredNotifications.filter(
+        (notification) => notification.isWeather || notification.hasDot
+      );
+    } else if (importantFilter) {
+      // Filter important notifications
+      filteredNotifications = filteredNotifications.filter(
+        (notification) => notification.hasExclamation
+      );
+    } else if (unreadFilter) {
+      // Filter unread notifications
       filteredNotifications = filteredNotifications.filter(
         (notification) => notification.hasDot
+      );
+    } else if (weatherFilter) {
+      // Filter weather notifications
+      filteredNotifications = filteredNotifications.filter(
+        (notification) => notification.isWeather
       );
     }
 
@@ -115,9 +151,9 @@ export default function Recent() {
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
-          width: "100%",
+          width: "90%",
           position: "absolute",
-          top: "10%",
+          top: "15%",
         }}
       >
         <Text style={styles.title}>RECENT</Text>
@@ -133,12 +169,15 @@ export default function Recent() {
             style={styles.notification}
             onPress={() => openModal(notification)}
           >
-            <Text style={styles.body}>{notification.title}</Text>
+            <View style={{flexDirection: 'row'}}>
+              {notification.hasDot && <View style={styles.dot} />}
+              <Text style={styles.body}>{notification.title}</Text>
+            </View>
+        
             <View style={styles.icons}>
               {notification.hasExclamation && (
                 <Text style={styles.warning}>!</Text>
               )}
-              {notification.hasDot && <View style={styles.dot} />}
             </View>
           </TouchableOpacity>
         ))}
@@ -157,9 +196,16 @@ export default function Recent() {
                 <Text style={styles.modalTitle}>
                   {selectedNotification.title}
                 </Text>
-                <Text style={styles.modalDetails}>
-                  {selectedNotification.details}
-                </Text>
+                {selectedNotification.imageUrl ? (
+                  <Image
+                    source={{ uri: selectedNotification.imageUrl }}
+                    style={styles.modalImage}
+                  />
+                ) : (
+                  <Text style={styles.modalDetails}>
+                    {selectedNotification.details}
+                  </Text>
+                )}
                 <Text style={styles.modalDate}>
                   Date: {selectedNotification.date}
                 </Text>
@@ -197,17 +243,45 @@ export default function Recent() {
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Filter</Text>
+            <View>
+              {/* Important */}
+              <TouchableOpacity
+                style={styles.checkbox}
+                onPress={() => setImportantFilter(!importantFilter)}
+              >
+                <MaterialIcons
+                  name={
+                    importantFilter ? "check-box" : "check-box-outline-blank"
+                  }
+                  style={styles.checkboxIcon}
+                />
+                <Text style={styles.checkboxLabel}>Important</Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.checkbox}
-              onPress={() => setUnreadFilter(!unreadFilter)}
-            >
-              <MaterialIcons
-                name={unreadFilter ? "check-box" : "check-box-outline-blank"}
-                style={styles.checkboxIcon}
-              />
-              <Text style={styles.checkboxLabel}>Unread</Text>
-            </TouchableOpacity>
+              {/* Unread filter */}
+              <TouchableOpacity
+                style={styles.checkbox}
+                onPress={() => setUnreadFilter(!unreadFilter)}
+              >
+                <MaterialIcons
+                  name={unreadFilter ? "check-box" : "check-box-outline-blank"}
+                  style={styles.checkboxIcon}
+                />
+                <Text style={styles.checkboxLabel}>Unread</Text>
+              </TouchableOpacity>
+
+              {/* Weather Filter */}
+              <TouchableOpacity
+                style={styles.checkbox}
+                onPress={() => setWeatherFilter(!weatherFilter)}
+              >
+                <MaterialIcons
+                  name={weatherFilter ? "check-box" : "check-box-outline-blank"}
+                  style={styles.checkboxIcon}
+                />
+                <Text style={styles.checkboxLabel}>Weather</Text>
+              </TouchableOpacity>
+            </View>
 
             <TouchableOpacity onPress={() => setShowStartPicker(true)}>
               <Text style={styles.datePicker}>
