@@ -146,21 +146,45 @@ export const useTextStyles = () => {
     },
     modalButton: {
       flex: 1,
-      padding: 10,
+      padding: '3%',
       borderRadius: 8,
       marginHorizontal: 5,
       alignItems: 'center',
       borderWidth: 1, 
       borderColor: Colors.light.background, 
+      color: Colors.light.text, 
     },
     button: {
-      backgroundColor: "#FFF",
       borderWidth: 1,
+      borderRadius: 8,
+      borderColor: Colors.light.background, 
+      padding: '3%', 
+      marginHorizontal: '8%', 
+      marginVertical: '5%', 
     },
     buttonText: {
       color: Colors.light.text,
       fontSize: 16,
       fontWeight: 'bold',
+    },
+    checkbox: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginVertical: 10,
+    },
+    checkboxIcon: {
+      fontSize: 24,
+      color: Colors.light.text,
+      marginRight: 10,
+    },
+    checkboxLabel: {
+      fontSize: 16,
+      color: Colors.light.text,
+    },
+    datePicker: {
+      fontSize: 16,
+      color: Colors.light.text,
+      marginVertical: 10,
     },
   });
 };
