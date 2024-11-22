@@ -18,6 +18,11 @@ export default function Index() {
         isLooping
         onError={(e) => console.log("Error loading video:", e)}
       />
+
+      {/* Activity Log */}
+      <Text style={[styles.header, {marginTop: '15%'}]}>ACTIVITY LOG</Text>
+      <View>
+      </View>
     </View>
   );
 }

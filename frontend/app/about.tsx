@@ -7,7 +7,7 @@ export default function About() {
 
   return (
     <View style={styles.view}>
-      <Text style={styles.title}>About DoorSense</Text>
+      <Text style={[styles.title, {position: 'absolute', top: '10%'}]}>About DoorSense</Text>
       <Text style={[styles.body, { marginBottom: "5%" }]}>
         DoorSense is a smart door assistant designed to transform any
         traditional door into a multifunctional smart system. Utilizing a

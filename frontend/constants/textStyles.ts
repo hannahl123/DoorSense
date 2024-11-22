@@ -23,10 +23,9 @@ export const useTextStyles = () => {
       marginBottom: "10%",
     },
     header: {
-      fontSize: 18,
-      fontWeight: "bold",
+      fontSize: 20,
       color: Colors.light.text,
-      marginBottom: "1%",
+      marginVertical: "3%",
       alignSelf: "flex-start",
     },
     video: {
