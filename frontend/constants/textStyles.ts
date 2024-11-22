@@ -120,7 +120,7 @@ export const useTextStyles = () => {
       padding: '5%',
       alignItems: "center",
       elevation: 5,
-      height: '50%'
+      height: '60%'
     },
     modalTitle: {
       color: Colors.light.text,
