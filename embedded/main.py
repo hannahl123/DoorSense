@@ -10,7 +10,7 @@ class ButtonSensor:
         self.last_change: float = 0
         self.timeout: float = 0.5
     def get_state(self) -> int:
-        return self.button.is_pressed 
+        return self.button.is_pressed
     def update(self):
         val = False;
         if (self.state != self.get_state()):
