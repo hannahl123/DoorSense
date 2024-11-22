@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const URI = "http://localhost:3000";
+import { API_ENDPOINT } from "@env";
 
 export async function getActivities(limit: number) {
   try {
-    const response = await axios.get("/activities", {
+    const response = await axios.get(`${API_ENDPOINT}/activities`, {
       params: {
         limit: limit,
       },
@@ -23,7 +23,7 @@ export async function getNotifications(
   end_date?: Date
 ) {
   try {
-    const response = await axios.get("/notifications", {
+    const response = await axios.get(`${API_ENDPOINT}/notifications`, {
       params: {
         important: important,
         parcel: parcel,
