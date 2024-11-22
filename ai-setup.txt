@@ -1,8 +1,25 @@
-// https://www.youtube.com/watch?reload=9&app=desktop&v=nnoDqfAYlB0
-// https://www.youtube.com/watch?v=-ZyFYniGUsw
+Tutorials:
+- Tensorflow Lite: https://www.youtube.com/watch?reload=9&app=desktop&v=nnoDqfAYlB0
+- Model Training for Raspberry Pi: https://www.youtube.com/watch?v=-ZyFYniGUsw
+- ESP Camera: https://gpiocc.github.io/learn/raspberrypi/esp/ml/2020/11/08/martin-ku-stream-video-from-esp32-to-raspberry-pi.html
+
+Documentation:
+- TFLite Runtime: https://ai.google.dev/edge/litert/inference
+- Basic IO: https://projects.raspberrypi.org/en/projects/physical-computing/0
+
+Setup Commands:
 python -m venv venv/
 venv/scripts/activate.ps1 (WINDOWS)
 source venv/scripts/activate (UNIX)
-pip install --no-dependencies tflite-model-maker
-pip install tflite-model-maker
-pip install tensorflow
+pip install --no-dependencies tflite-model-maker (maybe doesn't work)
+pip install tflite-model-maker (maybe doesn't work)
+pip install tensorflow (on computer)
+pip install tflite-runtime (on edge device)
+pip install gpiozero (on Raspberry Pi)
+
+Possible Datasets:
+- Parcel Detection: https://studio.edgeimpulse.com/public/103841/latest
+- Human Detection: https://www.kaggle.com/datasets/jcoral02/inriaperson
+
+Troubleshooting:
+- On Raspberry Pi, numpy may need to be downgraded to <2.0 to be compatible with opencv-python
