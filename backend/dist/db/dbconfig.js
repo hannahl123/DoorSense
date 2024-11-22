@@ -4,7 +4,7 @@ const config = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'Doorsence',
+    database: 'Doorsense',
     connectionLimit: 5,
 };
 exports.default = config;
