@@ -26,7 +26,7 @@ export const setDarkMode = async (on: boolean) => {
   }
 };
 
-export const getDarkMode = async (on: boolean) => {
+export const getDarkMode = async () => {
   try {
     const on = await AsyncStorage.getItem("dark-mode");
     if (on === null || on === "true") return true;
