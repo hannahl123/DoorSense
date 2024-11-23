@@ -16,3 +16,5 @@ export const Colors = {
     icon: '#1E6091', 
   },
 };
+
+export const getColors = (theme: "light" | "dark") => Colors[theme];

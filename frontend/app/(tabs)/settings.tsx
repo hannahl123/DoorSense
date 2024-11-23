@@ -3,8 +3,6 @@ import { Pressable, Text, View, Switch, TouchableOpacity } from "react-native";
 import { switchStyles, useStyles } from "@/constants/Styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useExpoRouter } from "expo-router/build/global-state/router-store";
-
-import { Colors } from "../../constants/Colors";
 import {
   getDarkMode,
   getPushNotifications,
@@ -14,6 +12,7 @@ import {
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 export default function Settings() {
+
   const styles = useStyles();
   const router = useExpoRouter();
   const handlePress = () => {

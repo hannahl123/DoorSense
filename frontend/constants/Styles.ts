@@ -1,9 +1,11 @@
-import { StyleSheet, Platform } from "react-native";
-import { Colors } from "./Colors";
-
-
+import { StyleSheet } from "react-native";
+import { Colors, getColors } from "./Colors";
+import { useTheme } from "@/components/ThemeContext";
 
 export const useStyles = () => {
+  const {theme} = useTheme();
+  const Colors = getColors(theme);
+
   return StyleSheet.create({
     view: {
       flex: 1,
@@ -15,12 +17,12 @@ export const useStyles = () => {
     title: {
       fontSize: 30,
       fontWeight: "bold",
-      color: Colors.light.primary,
+      color: Colors.primary,
       marginBottom: "10%",
     },
     header: {
       fontSize: 20,
-      color: Colors.light.primary,
+      color: Colors.primary,
       marginVertical: "3%",
       alignSelf: "flex-start",
     },
@@ -29,7 +31,7 @@ export const useStyles = () => {
       height: "35%",
     },
     rect: {
-      borderColor: Colors.light.secondary,
+      borderColor: Colors.secondary,
       borderWidth: 1.5,
       borderRadius: 8, 
       width: "90%",
@@ -42,34 +44,34 @@ export const useStyles = () => {
     optionText: {
       fontSize: 16,
       fontWeight: "semibold",
-      color: Colors.light.primary,
+      color: Colors.primary,
     },
     settings_icon: {
-      color: Colors.light.primary,
+      color: Colors.primary,
       marginTop: -4,
       marginRight: "3%",
       fontSize: 25,
     },
     body: {
-      color: Colors.light.primary,
+      color: Colors.primary,
       fontSize: 15,
     },
     toggle: {
-      color: Colors.light.primary,
+      color: Colors.primary,
       transform: [{ scale: 0.6 }],
       marginVertical: "-2%",
       marginRight: "-2%",
     },
     warning: {
       paddingHorizontal: "1%",
-      color: Colors.light.primary,
+      color: Colors.primary,
       fontSize: 18,
       fontWeight: "bold",
     },
     filtericon: {
       fontSize: 38,
       paddingLeft: "10%",
-      color: Colors.light.primary,
+      color: Colors.primary,
     },
     container: {
       flex: 1,
@@ -85,7 +87,7 @@ export const useStyles = () => {
       justifyContent: "space-between",
       alignItems: "center",
       borderBottomWidth: 1,
-      borderBottomColor: Colors.light.secondary,
+      borderBottomColor: Colors.secondary,
       paddingVertical: 12,
       width: "100%",
     },
@@ -98,7 +100,7 @@ export const useStyles = () => {
     dot: {
       width: 10,
       height: 10,
-      backgroundColor: Colors.light.secondary,
+      backgroundColor: Colors.secondary,
       borderRadius: 5,
       marginRight: 15,
       marginTop: 4
@@ -119,13 +121,13 @@ export const useStyles = () => {
       height: '60%'
     },
     modalTitle: {
-      color: Colors.light.primary,
+      color: Colors.primary,
       fontSize: 20,
       fontWeight: "bold",
       marginBottom: '5%',
     },
     modalDetails: {
-      color: Colors.light.primary,
+      color: Colors.primary,
       fontSize: 16,
       marginBottom: 8,
       textAlign: "center",
@@ -137,7 +139,7 @@ export const useStyles = () => {
     }, 
     modalDate: {
       fontSize: 14,
-      color: Colors.light.primary,
+      color: Colors.primary,
       marginTop: '6%',
       marginBottom: '3%'
     },
@@ -153,19 +155,19 @@ export const useStyles = () => {
       marginHorizontal: 5,
       alignItems: "center",
       borderWidth: 1,
-      borderColor: Colors.light.secondary,
-      color: Colors.light.primary,
+      borderColor: Colors.secondary,
+      color: Colors.primary,
     },
     button: {
       borderWidth: 1,
       borderRadius: 8,
-      borderColor: Colors.light.secondary,
+      borderColor: Colors.secondary,
       padding: "3%",
       marginHorizontal: "8%",
       marginVertical: "5%",
     },
     buttonText: {
-      color: Colors.light.primary,
+      color: Colors.primary,
       fontSize: 16,
       fontWeight: "bold",
     },
@@ -176,16 +178,16 @@ export const useStyles = () => {
     },
     checkboxIcon: {
       fontSize: 24,
-      color: Colors.light.primary,
+      color: Colors.primary,
       marginRight: 10,
     },
     checkboxLabel: {
       fontSize: 16,
-      color: Colors.light.primary,
+      color: Colors.primary,
     },
     datePicker: {
       fontSize: 16,
-      color: Colors.light.primary,
+      color: Colors.primary,
       marginVertical: 10,
     },
     activityLog: {
@@ -193,7 +195,7 @@ export const useStyles = () => {
       maxHeight: 200,
       width: '100%', 
       backgroundColor: '#FFF', 
-      color: Colors.light.primary,
+      color: Colors.primary,
     }, 
     notificationContainer: {
       paddingHorizontal: '2%', 
@@ -201,28 +203,28 @@ export const useStyles = () => {
       paddingBottom: '3.5%', 
       marginVertical: '2%', 
       borderBottomWidth: 1, 
-      borderBottomColor: Colors.light.secondary,
+      borderBottomColor: Colors.secondary,
       flexDirection: 'row', 
       justifyContent: 'space-between',
     }, 
     notificationTitle: {
       fontSize: 13, 
-      color: Colors.light.primary, 
+      color: Colors.primary, 
     }, 
     notificationDetails: {
       fontSize: 12, 
-      color: Colors.light.primary, 
+      color: Colors.primary, 
     }, 
     activityHeader: {
       marginTop: '3%', 
       flexDirection: 'row', 
       borderBottomWidth: 1, 
       width: '100%', 
-      borderBottomColor: Colors.light.secondary,
+      borderBottomColor: Colors.secondary,
       paddingBottom: '3%', 
     }, 
     logHeader: {
-      color: Colors.light.secondary, 
+      color: Colors.secondary, 
       fontSize: 15, 
       paddingHorizontal: '2%', 
     }, 
@@ -231,12 +233,12 @@ export const useStyles = () => {
 
 export const switchStyles = {
   trackColor: {
-    false: Colors.light.primary, 
-    true: Colors.light.secondary, 
+    false: Colors.primary, 
+    true: Colors.secondary, 
   }, 
   thumbColor: {
     on: "#FFF", // circle colour when on
     off: "#FFF" // circle colour when off
   }, 
-  ios_backgroundColor: Colors.light.primary, 
+  ios_backgroundColor: Colors.primary, 
 }
