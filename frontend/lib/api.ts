@@ -2,13 +2,18 @@ import axios from "axios";
 
 import { API_ENDPOINT } from "@env";
 
-export async function getActivities(limit: number) {
+export async function getActivities(limit?: number) {
   try {
-    const response = await axios.get(`${API_ENDPOINT}/activities`, {
-      params: {
-        limit: limit,
-      },
-    });
+    const response = await axios.get(
+      `${API_ENDPOINT}/activities`,
+      limit
+        ? {
+            params: {
+              limit: limit,
+            },
+          }
+        : {}
+    );
     return response.data;
   } catch (error) {
     console.error(`Error experienced when fetching activities:\n${error}`);
