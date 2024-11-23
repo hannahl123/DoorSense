@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, TouchableOpacity, ScrollView, Modal, Image } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Modal,
+  Image,
+} from "react-native";
 import { useTextStyles } from "@/constants/textStyles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Colors } from "@/constants/Colors";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { getNotifications } from "@/lib/api";
 
 export default function Recent() {
   const styles = useTextStyles();
 
   type Notification = {
+    id: number;
     title: string;
     details: string | null;
     imageUrl: string | null;
@@ -19,6 +28,7 @@ export default function Recent() {
   };
 
   const initialNotifications: Notification[] = [
+    /*
     {
       title: "Intruder detected",
       details: null,
@@ -59,13 +69,20 @@ export default function Recent() {
       hasDot: false,
       isWeather: true,
     },
+    */
   ];
 
-  const [notifications, setNotifications] =
-    useState<Notification[]>(initialNotifications);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [selectedNotification, setSelectedNotification] =
     useState<Notification | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
+
+  // Fetch notifications
+  useEffect(() => {
+    const loadNotifications = async () =>
+      setNotifications(await getNotifications());
+    loadNotifications();
+  }, []);
 
   // Filters
   const [filterModalVisible, setFilterModalVisible] = useState(false);
@@ -169,11 +186,11 @@ export default function Recent() {
             style={styles.notification}
             onPress={() => openModal(notification)}
           >
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: "row" }}>
               {notification.hasDot && <View style={styles.dot} />}
               <Text style={styles.body}>{notification.title}</Text>
             </View>
-        
+
             <View style={styles.icons}>
               {notification.hasExclamation && (
                 <Text style={styles.warning}>!</Text>
