@@ -50,7 +50,7 @@ export default function Recent() {
       isWeather: false,
     },
     {
-      title: "Rain starting at 10:00 AM today",
+      title: "Rain starting soon",
       details: null,
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewZsKrVeHBvxcN-xEFaQOoHfjc9Z-AsgIOw&s",
@@ -151,7 +151,7 @@ export default function Recent() {
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
-          width: "90%",
+          width: "100%",
           position: "absolute",
           top: "15%",
         }}

@@ -26,10 +26,15 @@ export default function Index() {
       time: "09:00 PM",
     },
     {
-      title: "Parcel delivered",
+      title: "Parcel delivered at door",
       date: "2024-11-21",
       time: "05:15 PM",
     },
+    {
+      title: "Rain starting soon",
+      date: "2024-11-20", 
+      time: "08: 20 AM"
+    }
   ]);
 
   return (

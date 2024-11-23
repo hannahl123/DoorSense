@@ -81,7 +81,7 @@ export const useTextStyles = () => {
       backgroundColor: "#fff",
       marginTop: "30%",
       maxHeight: "75%",
-      width: '100%'
+      width: '110%', 
     },
     notification: {
       flexDirection: "row",
