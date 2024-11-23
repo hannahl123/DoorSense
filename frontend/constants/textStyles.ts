@@ -191,5 +191,43 @@ export const useTextStyles = () => {
       color: Colors.light.text,
       marginVertical: 10,
     },
+    activityLog: {
+      marginTop: '3%',
+      maxHeight: 200,
+      width: '100%', 
+      backgroundColor: '#FFF', 
+      color: Colors.light.text,
+    }, 
+    notificationContainer: {
+      paddingHorizontal: '2%', 
+      paddingTop: '0%', 
+      paddingBottom: '3.5%', 
+      marginVertical: '2%', 
+      borderBottomWidth: 1, 
+      borderBottomColor: Colors.light.background,
+      flexDirection: 'row', 
+      justifyContent: 'space-between',
+    }, 
+    notificationTitle: {
+      fontSize: 13, 
+      color: Colors.light.text, 
+    }, 
+    notificationDetails: {
+      fontSize: 12, 
+      color: Colors.light.text, 
+    }, 
+    activityHeader: {
+      marginTop: '3%', 
+      flexDirection: 'row', 
+      borderBottomWidth: 1, 
+      width: '100%', 
+      borderBottomColor: Colors.light.background,
+      paddingBottom: '3%', 
+    }, 
+    logHeader: {
+      color: Colors.light.background, 
+      fontSize: 15, 
+      paddingHorizontal: '2%', 
+    }
   });
 };
