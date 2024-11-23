@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Pressable, Text, View, Switch, TouchableOpacity } from "react-native";
-import { useTextStyles } from "@/constants/textStyles";
+import { switchStyles, useTextStyles } from "@/constants/textStyles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useExpoRouter } from "expo-router/build/global-state/router-store";
 
@@ -43,12 +43,9 @@ export default function Settings() {
       >
         <Text style={styles.optionText}>PUSH NOTIFICATIONS</Text>
         <Switch
-          trackColor={{
-            false: Colors.light.background,
-            true: Colors.light.text,
-          }} // Customize colors
-          thumbColor={isEnabled ? "#FFF" : "#fff"} // Customize thumb color
-          ios_backgroundColor="#3e3e3e"
+          trackColor={switchStyles.trackColor} 
+          thumbColor={isEnabled ? switchStyles.thumbColor.on : switchStyles.thumbColor.off}
+          ios_backgroundColor={switchStyles.ios_backgroundColor}
           onValueChange={async () => {
             setPushNotifications(!isEnabled);
             setIsEnabled((prevState) => !prevState);

@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { useTextStyles } from "@/constants/textStyles";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Colors } from "@/constants/Colors";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as api from "@/lib/api";
 
@@ -60,7 +59,7 @@ export default function Recent() {
       isWeather: false,
     },
     {
-      title: "Rain starting at 10:00 AM today",
+      title: "Rain starting soon",
       details: null,
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewZsKrVeHBvxcN-xEFaQOoHfjc9Z-AsgIOw&s",
@@ -169,7 +168,7 @@ export default function Recent() {
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
-          width: "90%",
+          width: "100%",
           position: "absolute",
           top: "15%",
         }}
