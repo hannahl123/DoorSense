@@ -19,12 +19,12 @@ export const useTextStyles = () => {
     title: {
       fontSize: 30,
       fontWeight: "bold",
-      color: Colors.light.text,
+      color: Colors.light.primary,
       marginBottom: "10%",
     },
     header: {
       fontSize: 20,
-      color: Colors.light.text,
+      color: Colors.light.primary,
       marginVertical: "3%",
       alignSelf: "flex-start",
     },
@@ -33,7 +33,7 @@ export const useTextStyles = () => {
       height: 200,
     },
     rect: {
-      borderColor: Colors.light.background,
+      borderColor: Colors.light.secondary,
       borderWidth: 1.5,
       width: "90%",
       paddingHorizontal: "7%",
@@ -45,34 +45,34 @@ export const useTextStyles = () => {
     optionText: {
       fontSize: 16,
       fontWeight: "semibold",
-      color: Colors.light.text,
+      color: Colors.light.primary,
     },
     settings_icon: {
-      color: Colors.light.text,
+      color: Colors.light.primary,
       marginTop: -4,
       marginRight: "3%",
       fontSize: 25,
     },
     body: {
-      color: Colors.light.text,
+      color: Colors.light.primary,
       fontSize: 15,
     },
     toggle: {
-      color: Colors.light.text,
+      color: Colors.light.primary,
       transform: [{ scale: 0.65 }],
       marginVertical: "-2%",
       marginRight: "-2%",
     },
     warning: {
       paddingHorizontal: "1%",
-      color: Colors.light.text,
+      color: Colors.light.primary,
       fontSize: 18,
       fontWeight: "bold",
     },
     filtericon: {
       fontSize: 38,
       paddingLeft: "10%",
-      color: Colors.light.text,
+      color: Colors.light.primary,
     },
     container: {
       flex: 1,
@@ -88,7 +88,7 @@ export const useTextStyles = () => {
       justifyContent: "space-between",
       alignItems: "center",
       borderBottomWidth: 1,
-      borderBottomColor: Colors.light.background,
+      borderBottomColor: Colors.light.secondary,
       paddingVertical: 12,
       width: "100%",
     },
@@ -101,7 +101,7 @@ export const useTextStyles = () => {
     dot: {
       width: 10,
       height: 10,
-      backgroundColor: Colors.light.background,
+      backgroundColor: Colors.light.secondary,
       borderRadius: 5,
       marginRight: 15,
       marginTop: 4
@@ -122,13 +122,13 @@ export const useTextStyles = () => {
       height: '60%'
     },
     modalTitle: {
-      color: Colors.light.text,
+      color: Colors.light.primary,
       fontSize: 20,
       fontWeight: "bold",
       marginBottom: '5%',
     },
     modalDetails: {
-      color: Colors.light.text,
+      color: Colors.light.primary,
       fontSize: 16,
       marginBottom: 8,
       textAlign: "center",
@@ -140,7 +140,7 @@ export const useTextStyles = () => {
     }, 
     modalDate: {
       fontSize: 14,
-      color: Colors.light.text,
+      color: Colors.light.primary,
       marginTop: '6%',
       marginBottom: '3%'
     },
@@ -156,19 +156,19 @@ export const useTextStyles = () => {
       marginHorizontal: 5,
       alignItems: "center",
       borderWidth: 1,
-      borderColor: Colors.light.background,
-      color: Colors.light.text,
+      borderColor: Colors.light.secondary,
+      color: Colors.light.primary,
     },
     button: {
       borderWidth: 1,
       borderRadius: 8,
-      borderColor: Colors.light.background,
+      borderColor: Colors.light.secondary,
       padding: "3%",
       marginHorizontal: "8%",
       marginVertical: "5%",
     },
     buttonText: {
-      color: Colors.light.text,
+      color: Colors.light.primary,
       fontSize: 16,
       fontWeight: "bold",
     },
@@ -179,16 +179,16 @@ export const useTextStyles = () => {
     },
     checkboxIcon: {
       fontSize: 24,
-      color: Colors.light.text,
+      color: Colors.light.primary,
       marginRight: 10,
     },
     checkboxLabel: {
       fontSize: 16,
-      color: Colors.light.text,
+      color: Colors.light.primary,
     },
     datePicker: {
       fontSize: 16,
-      color: Colors.light.text,
+      color: Colors.light.primary,
       marginVertical: 10,
     },
     activityLog: {
@@ -196,7 +196,7 @@ export const useTextStyles = () => {
       maxHeight: 200,
       width: '100%', 
       backgroundColor: '#FFF', 
-      color: Colors.light.text,
+      color: Colors.light.primary,
     }, 
     notificationContainer: {
       paddingHorizontal: '2%', 
@@ -204,28 +204,28 @@ export const useTextStyles = () => {
       paddingBottom: '3.5%', 
       marginVertical: '2%', 
       borderBottomWidth: 1, 
-      borderBottomColor: Colors.light.background,
+      borderBottomColor: Colors.light.secondary,
       flexDirection: 'row', 
       justifyContent: 'space-between',
     }, 
     notificationTitle: {
       fontSize: 13, 
-      color: Colors.light.text, 
+      color: Colors.light.primary, 
     }, 
     notificationDetails: {
       fontSize: 12, 
-      color: Colors.light.text, 
+      color: Colors.light.primary, 
     }, 
     activityHeader: {
       marginTop: '3%', 
       flexDirection: 'row', 
       borderBottomWidth: 1, 
       width: '100%', 
-      borderBottomColor: Colors.light.background,
+      borderBottomColor: Colors.light.secondary,
       paddingBottom: '3%', 
     }, 
     logHeader: {
-      color: Colors.light.background, 
+      color: Colors.light.secondary, 
       fontSize: 15, 
       paddingHorizontal: '2%', 
     }

@@ -13,15 +13,15 @@ export default function RootLayout() {
           paddingBottom: '3%',
           paddingHorizontal: '5%', 
           borderTopWidth: 1,
-          borderColor: Colors.light.background,
+          borderColor: Colors.light.secondary,
         },
         tabBarLabelStyle: {
           marginTop: '10%',
           fontSize: 13, 
           fontWeight: 500,
         }, 
-        tabBarActiveTintColor: Colors.light.background, 
-        tabBarInactiveTintColor: Colors.light.text, 
+        tabBarActiveTintColor: Colors.light.secondary, 
+        tabBarInactiveTintColor: Colors.light.primary, 
       }}
     >
       <Tabs.Screen

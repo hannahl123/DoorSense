@@ -44,8 +44,8 @@ export default function Settings() {
         <Text style={styles.optionText}>PUSH NOTIFICATIONS</Text>
         <Switch
           trackColor={{
-            false: Colors.light.background,
-            true: Colors.light.text,
+            false: Colors.light.secondary,
+            true: Colors.light.primary,
           }} // Customize colors
           thumbColor={isEnabled ? "#FFF" : "#fff"} // Customize thumb color
           ios_backgroundColor="#3e3e3e"
