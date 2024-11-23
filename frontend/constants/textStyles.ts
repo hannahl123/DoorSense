@@ -1,6 +1,8 @@
 import { StyleSheet, Platform } from "react-native";
 import { Colors } from "./Colors";
 
+
+
 export const useTextStyles = () => {
   return StyleSheet.create({
     view: {
@@ -24,11 +26,12 @@ export const useTextStyles = () => {
     },
     video: {
       width: "100%",
-      height: 200,
+      height: "35%",
     },
     rect: {
       borderColor: Colors.light.secondary,
       borderWidth: 1.5,
+      borderRadius: 8, 
       width: "90%",
       paddingHorizontal: "7%",
       paddingVertical: "7%",
@@ -53,7 +56,7 @@ export const useTextStyles = () => {
     },
     toggle: {
       color: Colors.light.primary,
-      transform: [{ scale: 0.65 }],
+      transform: [{ scale: 0.6 }],
       marginVertical: "-2%",
       marginRight: "-2%",
     },
