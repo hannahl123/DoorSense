@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, ScrollView, Modal, Image } from "react-native";
-import { useTextStyles } from "@/constants/textStyles";
+import { useTextStyles, switchStyles } from "@/constants/textStyles";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Colors } from "@/constants/Colors";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default function Recent() {

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "./Colors";
 import {
@@ -228,6 +228,18 @@ export const useTextStyles = () => {
       color: Colors.light.secondary, 
       fontSize: 15, 
       paddingHorizontal: '2%', 
-    }
+    }, 
   });
 };
+
+export const switchStyles = {
+  trackColor: {
+    false: Colors.light.primary, 
+    true: Colors.light.secondary, 
+  }, 
+  thumbColor: {
+    on: "#FFF", // circle colour when on
+    off: "#FFF" // circle colour when off
+  }, 
+  ios_backgroundColor: Colors.light.primary, 
+}

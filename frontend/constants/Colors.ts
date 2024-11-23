@@ -11,14 +11,10 @@ export const Colors = {
     primary: '#1E6091', 
     secondary: '#52B69A', 
     icon: '#1E6091', 
-    tabIconDefault: '#1E6091', 
-    tabIconSelected: tintColorLight, 
   },
   dark: {
     primary: '#FFFFFF', 
     secondary: '#1E6091', 
     icon: '#1E6091', 
-    tabIconDefault: '#1E6091', 
-    tabIconSelected: tintColorDark, 
   },
 };
