@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, ScrollView, Modal, Image } from "react-native";
-import { useTextStyles, switchStyles } from "@/constants/textStyles";
+import { useTextStyles } from "@/constants/textStyles";
 import { MaterialIcons } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 

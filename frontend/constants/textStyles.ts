@@ -1,11 +1,5 @@
 import { StyleSheet, Platform } from "react-native";
-import { useFonts } from "expo-font";
 import { Colors } from "./Colors";
-import {
-  Montserrat_400Regular,
-  Montserrat_700Bold,
-  Montserrat_600SemiBold,
-} from "@expo-google-fonts/montserrat";
 
 export const useTextStyles = () => {
   return StyleSheet.create({
