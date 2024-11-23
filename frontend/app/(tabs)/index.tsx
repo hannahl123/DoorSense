@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, ScrollView } from "react-native";
 import { useTextStyles } from "@/constants/textStyles";
 import { Video } from "expo-av";
+
+import * as api from "@/lib/api";
 
 type Notification = {
   title: string;
@@ -15,6 +17,7 @@ export default function Index() {
   const styles = useTextStyles();
 
   const [notifications, setNotifications] = useState<Notification[]>([
+    /*
     {
       title: "Intruder detected",
       date: "2024-11-22",
@@ -35,12 +38,20 @@ export default function Index() {
       date: "2024-11-20", 
       time: "08: 20 AM"
     }
+    */
   ]);
 
+  useEffect(() => {
+    const loadNotifications = async () =>
+      setNotifications(await api.getActivities());
+
+    loadNotifications();
+  }, []);
+
   return (
-    <View style={[styles.view, {paddingTop: '25%'}]}>
+    <View style={[styles.view, { paddingTop: "25%" }]}>
       <Text style={styles.title}>DOORSENSE</Text>
-      <Text style={[styles.header, {marginTop: '0%'}]}>LIVE</Text>
+      <Text style={[styles.header, { marginTop: "0%" }]}>LIVE</Text>
 
       <Video
         source={{ uri: "https://www.w3schools.com/html/mov_bbb.mp4" }}
@@ -54,7 +65,7 @@ export default function Index() {
       <Text style={[styles.header, { marginTop: "10%" }]}>ACTIVITY LOG</Text>
       <View style={styles.activityHeader}>
         <Text style={styles.logHeader}>Activity</Text>
-        <Text style={[styles.logHeader, {right: '-35%'}]}>Date</Text>
+        <Text style={[styles.logHeader, { right: "-35%" }]}>Date</Text>
       </View>
       <ScrollView style={styles.activityLog}>
         {notifications.map((notification, index) => (
