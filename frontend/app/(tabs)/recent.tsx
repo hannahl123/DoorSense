@@ -11,7 +11,7 @@ import { useTextStyles } from "@/constants/textStyles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Colors } from "@/constants/Colors";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { getNotifications } from "@/lib/api";
+import * as api from "@/lib/api";
 
 export default function Recent() {
   const styles = useTextStyles();
@@ -80,7 +80,7 @@ export default function Recent() {
   // Fetch notifications
   useEffect(() => {
     const loadNotifications = async () =>
-      setNotifications(await getNotifications());
+      setNotifications(await api.getNotifications());
     loadNotifications();
   }, []);
 
@@ -116,6 +116,7 @@ export default function Recent() {
           (notification) => notification.title !== selectedNotification.title
         )
       );
+      api.deleteNotification(selectedNotification.id);
       closeModal();
     }
   };

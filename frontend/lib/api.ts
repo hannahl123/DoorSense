@@ -37,3 +37,13 @@ export async function getNotifications(
     return [];
   }
 }
+
+export async function deleteNotification(id: number) {
+  try {
+    const response = await axios.delete(`${API_ENDPOINT}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error experienced when deleting notification:\n${error}`);
+    return null;
+  }
+}
