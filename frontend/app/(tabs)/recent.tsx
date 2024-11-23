@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, ScrollView, Modal, Image } from "react-native";
-import { useTextStyles } from "@/constants/textStyles";
+import { useStyles } from "@/constants/Styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default function Recent() {
-  const styles = useTextStyles();
+  const styles = useStyles();
 
   type Notification = {
     title: string;

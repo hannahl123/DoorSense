@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Pressable, Text, View, Switch, TouchableOpacity } from "react-native";
-import { switchStyles, useTextStyles } from "@/constants/textStyles";
+import { switchStyles, useStyles } from "@/constants/Styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useExpoRouter } from "expo-router/build/global-state/router-store";
 
@@ -14,7 +14,7 @@ import {
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 export default function Settings() {
-  const styles = useTextStyles();
+  const styles = useStyles();
   const router = useExpoRouter();
   const handlePress = () => {
     console.log("Button pressed");

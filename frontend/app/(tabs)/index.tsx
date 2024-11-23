@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Text, View, ScrollView } from "react-native";
-import { useTextStyles } from "@/constants/textStyles";
+import { useStyles } from "@/constants/Styles";
 import { Video } from "expo-av";
 
 type Notification = {
@@ -12,7 +12,7 @@ type Notification = {
 };
 
 export default function Index() {
-  const styles = useTextStyles();
+  const styles = useStyles();
 
   const [notifications, setNotifications] = useState<Notification[]>([
     {

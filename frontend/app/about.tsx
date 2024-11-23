@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { useTextStyles } from "@/constants/textStyles";
+import { useStyles } from "@/constants/Styles";
 
 export default function About() {
-  const styles = useTextStyles();
+  const styles = useStyles();
 
   return (
     <View style={styles.view}>

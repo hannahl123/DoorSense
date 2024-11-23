@@ -3,7 +3,7 @@ import { Colors } from "./Colors";
 
 
 
-export const useTextStyles = () => {
+export const useStyles = () => {
   return StyleSheet.create({
     view: {
       flex: 1,
