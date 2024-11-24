@@ -35,7 +35,8 @@ export async function GetNotificationsbyCategories(
                     result.parcel,
                     result.reminders,
                     result.unread,
-                    result.date
+                    result.date,
+                    result.image
                 )
         );
     } catch (err) {
@@ -72,14 +73,15 @@ export async function AddNotification(
     parcel: number,
     reminders: number,
     unread: number,
-    date: string
+    date: string,
+    image: Buffer | null
 ): Promise<number> {
     try {
         const result = await pool.query(
             `
-            INSERT INTO notifications (title, important, weather, visitor, parcel, reminders, unread, date) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-            [title, important, weather, visitor, parcel, reminders, unread, date]
+            INSERT INTO notifications (title, important, weather, visitor, parcel, reminders, unread, date, image) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [title, important, weather, visitor, parcel, reminders, unread, date, image]
         );
         const insertId = Number(result.insertId);
         console.log("Notification added with ID:", insertId);
@@ -132,6 +134,38 @@ export async function DeleteNotificationById(id: number): Promise<boolean> {
         );
         console.log(`Notification with ID ${id} deleted.`);
         return result.affectedRows > 0;
+    } catch (err) {
+        console.error("Database query error:", err);
+        throw err;
+    }
+}
+
+export async function GetNotificationsbyId(
+    id: number,
+): Promise<Notification[]> {
+    try {
+        const results = await pool.query(
+            `
+            SELECT * 
+            FROM notifications 
+            WHERE id = ?`,
+            [id]
+        );
+        return results.map(
+            (result: any) =>
+                new Notification(
+                    result.id,
+                    result.title,
+                    result.important,
+                    result.weather,
+                    result.visitor,
+                    result.parcel,
+                    result.reminders,
+                    result.unread,
+                    result.date,
+                    result.image
+                )
+        );
     } catch (err) {
         console.error("Database query error:", err);
         throw err;

@@ -21,7 +21,13 @@ router.get('/',async (req, res) =>{
 
 router.post('/', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const { activity, time } = req.body;
+        const activity = req.body.activity || req.query.activity;
+        const time = req.body.time || req.query.time;
+        console.log('Body:', req.body); // Logs the parsed body
+        console.log('Query Parameters:', req.query); // Logs the query parameters
+
+        console.log('Activity:', activity); // Logs the resolved `activity`
+        console.log('Time:', time); // Logs the resolved `time`
 
         if (!activity || typeof activity !== 'string') {
             res.status(400).json({ error: 'Activity is required and must be a string.' });

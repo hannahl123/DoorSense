@@ -4,6 +4,7 @@ export function validateNotificationRequest(req: Request, res: Response, next: N
     const { title, important, weather, visitor, parcel, reminders, unread, date } = req.body;
 
     if (!title || typeof title !== 'string') {
+        console.log(title);
         res.status(400).json({ error: 'Title is required and must be a string.' });
         return;
     }
@@ -13,6 +14,5 @@ export function validateNotificationRequest(req: Request, res: Response, next: N
         return;
     }
 
-    // Pass the request to the next middleware/handler
     next();
 }

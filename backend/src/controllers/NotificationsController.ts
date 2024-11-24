@@ -19,7 +19,7 @@ export async function GetNotificationsByCategories(
         reminders,
         unread,
         start_date,
-        end_date
+        end_date,
     );
 }
 
@@ -31,9 +31,10 @@ export async function AddNotification(
     parcel: number,
     reminders: number,
     unread: number,
-    date: string
+    date: string,
+    image: Buffer | null,
 ): Promise<number> {
-    return await db.AddNotification(title, important, weather, visitor, parcel, reminders, unread, date);
+    return await db.AddNotification(title, important, weather, visitor, parcel, reminders, unread, date, image);
 }
 
 export async function DeleteAllNotifications(): Promise<number> {
@@ -42,4 +43,10 @@ export async function DeleteAllNotifications(): Promise<number> {
 
 export async function deleteNotificationById(id: number): Promise<boolean> {
     return await db.DeleteNotificationById(id);
+}
+
+export async function GetNotificationsById(
+    id: number
+): Promise<Notification[]> {
+    return await db.GetNotificationsbyId(id);
 }

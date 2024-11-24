@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import * as NotificationController from '../controllers/NotificationsController';
 import { validateNotificationRequest } from '../middleware/validator';
+import upload from '../middleware/upload';
 
 const router = Router();
 
@@ -23,9 +24,16 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', validateNotificationRequest, async (req, res, next) => {
+router.post('/', upload.single('image'),validateNotificationRequest, async (req, res, next) => {
     try {
-        const { title, important, weather, visitor, parcel, reminders, unread, date } = req.body;
+        const { title, important, weather, visitor, parcel, reminders, unread, date } = req.body || req.query;
+        const image: Buffer | null = req.file
+        ? req.file.buffer
+        : req.query.file && typeof req.query.file === 'string'
+        ? Buffer.from(req.query.file, 'base64')
+        : null;
+        console.log('Body:', req.body);
+        console.log('File:', req.file);
 
         const id = await NotificationController.AddNotification(
             title,
@@ -35,13 +43,15 @@ router.post('/', validateNotificationRequest, async (req, res, next) => {
             Number(parcel),
             Number(reminders),
             Number(unread),
-            date
+            date,
+            image
         );
+        const imageUrl = image
+            ? `${req.protocol}://${req.get('host')}/notifications/image/${id}`
+            : null;
 
-        // Send success response with the new notification ID
-        res.status(201).json({ id });
+        res.status(201).json({ id, imageUrl });
     } catch (err) {
-        // Log error and send a proper JSON response
         console.error("Error creating notification:", err);
         next(err);
     }
@@ -52,7 +62,7 @@ router.delete('/', async (req, res, next) => {
         const deletedCount = await NotificationController.DeleteAllNotifications();
         res.status(200).json({ message: `Deleted ${deletedCount} notifications.` });
     } catch (err) {
-        next(err); // Pass the error to the error-handling middleware
+        next(err);
     }
 });
 
@@ -74,5 +84,28 @@ router.delete('/:id', async (req, res, next): Promise<void> => {
         next(err);
     }
 });
+
+router.get('/image/:id', async (req, res, next) => {
+    try {
+        const id = parseInt(req.params.id, 10);
+        if (isNaN(id)) {
+            res.status(400).json({ error: 'Invalid notification ID' });
+            return;
+        }
+
+        const notification = await NotificationController.GetNotificationsById(id);
+
+        if (!notification || !notification[0].image) {
+            res.status(404).json({ error: 'Image not found for this notification.' });
+            return;
+        }
+
+        res.set('Content-Type', 'image/png'); // Change MIME type based on stored image format
+        res.send(notification[0].image);
+    } catch (err) {
+        next(err);
+    }
+});
+
 
 export default router;
