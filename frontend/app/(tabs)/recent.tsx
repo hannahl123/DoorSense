@@ -229,7 +229,7 @@ export default function Recent() {
           justifyContent: "space-between",
           width: "100%",
           position: "absolute",
-          top: "10%",
+          top: "15%",
         }}
       >
         <Text style={styles.title}>RECENT</Text>

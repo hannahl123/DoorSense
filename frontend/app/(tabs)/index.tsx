@@ -38,8 +38,8 @@ export default function Index() {
   ]);
 
   return (
-    <View style={[styles.view, {paddingTop: '15%'}]}>
-      <Text style={styles.title}>DOORSENSE</Text>
+    <View style={styles.view}>
+      <Text style={[styles.title, {paddingTop: '25%'}]}>DOORSENSE</Text>
       <Text style={[styles.header, {marginTop: '0%'}]}>LIVE</Text>
 
       <Video
