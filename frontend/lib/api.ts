@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { API_ENDPOINT } from "@env";
+const API_ENDPOINT = process.env.EXPO_PUBLIC_API_ENDPOINT;
 
 export async function getActivities(limit?: number) {
   try {
