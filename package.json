@@ -1,0 +1,11 @@
+{
+    "dependencies": {
+      "express": "^4.21.1",
+      "mariadb": "^3.4.0",
+      "mysql2": "^3.11.4"
+    },
+    "devDependencies": {
+      "@types/express": "^5.0.0"
+    }
+  }
+  
