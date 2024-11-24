@@ -2,7 +2,7 @@ const config = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'Doorsense',
+    database: 'Doorsence',
     connectionLimit: 5,
 }
 
