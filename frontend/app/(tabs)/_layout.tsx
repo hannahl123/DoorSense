@@ -67,7 +67,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="about"
+        name="about" 
         options={{
           title: " ",
           headerShown: true,

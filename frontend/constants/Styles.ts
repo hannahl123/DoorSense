@@ -74,7 +74,7 @@ export const useStyles = () => {
     },
     container: {
       flex: 1,
-      paddingVertical: '3%',
+      paddingVertical: "3%",
       backgroundColor: colors.background,
       maxHeight: "75%",
       width: "100%",
@@ -224,6 +224,22 @@ export const useStyles = () => {
       color: colors.secondary,
       fontSize: 15,
       paddingHorizontal: "2%",
+    },
+    backButton: {
+      color: colors.primary,
+      position: "absolute",
+      top: "10%",
+      left: "10%",
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    back: {
+      color: colors.primary,
+    },
+    backText: {
+      marginLeft: 5, 
+      fontSize: 16, 
+      color: colors.primary, 
     },
   });
 };

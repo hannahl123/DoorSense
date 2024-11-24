@@ -1,13 +1,28 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useStyles } from "@/constants/Styles";
+import { useRouter } from "expo-router";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function About() {
   const styles = useStyles();
+  const router = useRouter();
 
   return (
     <View style={styles.view}>
-      <Text style={[styles.title, {position: 'absolute', top: '10%'}]}>About DoorSense</Text>
+
+      {/* Back Button */}
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => router.push("/settings")} // Navigate back to the settings page
+      >
+        <MaterialIcons name="arrow-back" size={24} style={styles.back} />
+        <Text style={styles.backText}>
+          Back
+        </Text>
+      </TouchableOpacity>
+
+      <Text style={styles.title}>About DoorSense</Text>
       <Text style={[styles.body, { marginBottom: "5%" }]}>
         DoorSense is a smart door assistant designed to transform any
         traditional door into a multifunctional smart system. Utilizing a
