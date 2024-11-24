@@ -23,8 +23,8 @@ export default function TabsLayout() {
           fontSize: 13,
           fontWeight: 500,
         },
-        tabBarActiveTintColor: colors.selected,
-        tabBarInactiveTintColor: colors.unselected,
+        tabBarActiveTintColor: colors.active,
+        tabBarInactiveTintColor: colors.inactive,
       }}
     >
       <Tabs.Screen
@@ -34,7 +34,7 @@ export default function TabsLayout() {
           tabBarIcon: ({ focused }) => (
             <MaterialIcons
               name={"home"}
-              color={focused ? colors.selected : colors.unselected}
+              color={focused ? colors.active : colors.inactive}
               size={30}
             />
           ),
@@ -47,7 +47,7 @@ export default function TabsLayout() {
           tabBarIcon: ({ focused }) => (
             <MaterialIcons
               name={"schedule"}
-              color={focused ? colors.selected : colors.unselected}
+              color={focused ? colors.active : colors.inactive}
               size={30}
             />
           ),
@@ -60,7 +60,7 @@ export default function TabsLayout() {
           tabBarIcon: ({ focused }) => (
             <MaterialIcons
               name={"settings"}
-              color={focused ? colors.selected : colors.unselected}
+              color={focused ? colors.active : colors.inactive}
               size={30}
             />
           ),
