@@ -7,13 +7,13 @@ import {
   Modal,
   Image,
 } from "react-native";
-import { useTextStyles } from "@/constants/textStyles";
+import { useStyles } from "@/constants/Styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as api from "@/lib/api";
 
 export default function Recent() {
-  const styles = useTextStyles();
+  const styles = useStyles();
 
   type Notification = {
     id: number;
@@ -122,14 +122,24 @@ export default function Recent() {
 
   const applyFilters = () => {
     let filteredNotifications = initialNotifications;
-
-    if (importantFilter && unreadFilter) {
+    if (importantFilter && unreadFilter && weatherFilter) {
+      filteredNotifications = filteredNotifications.filter(
+        (notification) =>
+          notification.hasDot ||
+          notification.hasExclamation ||
+          notification.isWeather
+      );
+    } else if (importantFilter && unreadFilter) {
       filteredNotifications = filteredNotifications.filter(
         (notification) => notification.hasExclamation || notification.hasDot
       );
     } else if (weatherFilter && unreadFilter) {
       filteredNotifications = filteredNotifications.filter(
         (notification) => notification.isWeather || notification.hasDot
+      );
+    } else if (importantFilter && weatherFilter) {
+      filteredNotifications = filteredNotifications.filter(
+        (notification) => notification.hasExclamation || notification.isWeather
       );
     } else if (importantFilter) {
       // Filter important notifications

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Pressable, Text, View, Switch, TouchableOpacity } from "react-native";
-import { switchStyles, useTextStyles } from "@/constants/textStyles";
+import { switchStyles, useStyles } from "@/constants/Styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useExpoRouter } from "expo-router/build/global-state/router-store";
-
-import { Colors } from "../../constants/Colors";
 import {
   getDarkMode,
   getPushNotifications,
@@ -12,15 +10,12 @@ import {
   setPushNotifications,
 } from "@/lib/storage";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
+import { useTheme } from "@/components/ThemeContext";
 
 export default function Settings() {
-  const styles = useTextStyles();
+  const styles = useStyles();
   const router = useExpoRouter();
-  const handlePress = () => {
-    console.log("Button pressed");
-    router.push("/about");
-  };
-
+  const { toggleTheme } = useTheme();
   const [isEnabled, setIsEnabled] = useState(false);
 
   // load push notifications state
@@ -43,8 +38,10 @@ export default function Settings() {
       >
         <Text style={styles.optionText}>PUSH NOTIFICATIONS</Text>
         <Switch
-          trackColor={switchStyles.trackColor} 
-          thumbColor={isEnabled ? switchStyles.thumbColor.on : switchStyles.thumbColor.off}
+          trackColor={switchStyles.trackColor}
+          thumbColor={
+            isEnabled ? switchStyles.thumbColor.on : switchStyles.thumbColor.off
+          }
           ios_backgroundColor={switchStyles.ios_backgroundColor}
           onValueChange={async () => {
             setPushNotifications(!isEnabled);
@@ -54,33 +51,35 @@ export default function Settings() {
           style={styles.toggle}
         />
       </View>
-      <View style={styles.rect}>
-        <Text style={styles.optionText}>DELETE ALL HISTORY</Text>
-        <TouchableOpacity
+      <TouchableOpacity
           onPress={() => alert("Deleted all previous history.")}
         >
-          <MaterialIcons name="delete" style={styles.settings_icon} />
-        </TouchableOpacity>
-      </View>
       <View style={styles.rect}>
-        <Text style={styles.optionText}>DARK MODE</Text>
-        <TouchableOpacity
-          onPress={async () => {
-            await setDarkMode(!(await getDarkMode()));
-            console.log(`dark mode: ${await getDarkMode()}`);
-            alert("Coming later, be patient bruh");
-          }}
-        >
-          <MaterialIcons name="contrast" style={styles.settings_icon} />
-        </TouchableOpacity>
+        <Text style={styles.optionText}>DELETE ALL HISTORY</Text>
+        
+          <MaterialIcons name="delete" style={styles.settings_icon} />
       </View>
-      <Pressable onPress={handlePress}>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={async () => {
+          toggleTheme();
+          await setDarkMode(!(await getDarkMode()));
+          console.log(`dark mode: ${await getDarkMode()}`);
+          //alert("Coming later, be patient bruh");
+        }}
+      >
+        <View style={styles.rect}>
+          <Text style={styles.optionText}>DARK MODE</Text>
+
+          <MaterialIcons name="contrast" style={styles.settings_icon} />
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => router.push("/about")}>
         <View style={styles.rect}>
           <Text style={styles.optionText}>ABOUT DOORSENSE</Text>
           <MaterialIcons name="info" style={styles.settings_icon} />
         </View>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 }
-

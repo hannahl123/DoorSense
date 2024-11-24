@@ -8,11 +8,17 @@ export const Colors = {
     secondary: '#52B69A', 
     background: '#FFF', 
     icon: '#1E6091', 
+    active: '#52B69A', 
+    inactive: '#1E6091', 
   },
   dark: {
-    primary: '#FFFFFF', 
+    primary: '#FFF', 
     secondary: '#52B69A', 
     background: '#1E6091', 
     icon: '#1E6091', 
+    active: '#FFF', 
+    inactive: '#52B69A', 
   },
 };
+
+export const getColors = (theme: "light" | "dark") => Colors[theme];

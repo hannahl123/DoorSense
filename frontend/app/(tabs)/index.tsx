@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, ScrollView } from "react-native";
-import { useTextStyles } from "@/constants/textStyles";
+import { useStyles } from "@/constants/Styles";
 import { Video } from "expo-av";
 
 import * as api from "@/lib/api";
@@ -14,7 +14,7 @@ type Notification = {
 };
 
 export default function Index() {
-  const styles = useTextStyles();
+  const styles = useStyles();
 
   const [notifications, setNotifications] = useState<Notification[]>([
     /*
@@ -49,8 +49,8 @@ export default function Index() {
   }, []);
 
   return (
-    <View style={[styles.view, { paddingTop: "25%" }]}>
-      <Text style={styles.title}>DOORSENSE</Text>
+    <View style={styles.view}>
+      <Text style={[styles.title, { paddingTop: "25%" }]}>DOORSENSE</Text>
       <Text style={[styles.header, { marginTop: "0%" }]}>LIVE</Text>
 
       <Video

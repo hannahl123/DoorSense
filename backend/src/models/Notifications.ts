@@ -8,6 +8,7 @@ export class Notification {
     reminders: number;
     unread: number;
     date: string;
+    image: Buffer | null;
 
     constructor(
         id: number,
@@ -18,7 +19,8 @@ export class Notification {
         parcel: number,
         reminders: number,
         unread: number,
-        date: string
+        date: string,
+        image: Buffer | null
     ) {
         this.id = id;
         this.title = title;
@@ -29,5 +31,6 @@ export class Notification {
         this.reminders = reminders;
         this.unread = unread;
         this.date = date;
+        this.image = image;
     }
 }
