@@ -74,12 +74,10 @@ export const useStyles = () => {
     },
     container: {
       flex: 1,
-      paddingHorizontal: 16,
-      paddingVertical: 8,
+      paddingVertical: '3%',
       backgroundColor: colors.background,
-      marginTop: "30%",
       maxHeight: "75%",
-      width: "110%",
+      width: "100%",
     },
     notification: {
       flexDirection: "row",

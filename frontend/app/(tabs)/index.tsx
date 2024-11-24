@@ -38,7 +38,7 @@ export default function Index() {
   ]);
 
   return (
-    <View style={[styles.view, {paddingTop: '25%'}]}>
+    <View style={[styles.view, {paddingTop: '15%'}]}>
       <Text style={styles.title}>DOORSENSE</Text>
       <Text style={[styles.header, {marginTop: '0%'}]}>LIVE</Text>
 

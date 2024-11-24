@@ -104,8 +104,11 @@ export default function Recent() {
 
   const applyFilters = () => {
     let filteredNotifications = initialNotifications;
-
-    if (importantFilter && unreadFilter) {
+    if (importantFilter && unreadFilter && weatherFilter) {
+      filteredNotifications = filteredNotifications.filter(
+        (notification) => notification.hasDot || notification.hasExclamation || notification.isWeather
+      )
+    } else if (importantFilter && unreadFilter) {
       filteredNotifications = filteredNotifications.filter(
         (notification) => notification.hasExclamation || notification.hasDot
       );
@@ -113,6 +116,10 @@ export default function Recent() {
       filteredNotifications = filteredNotifications.filter(
         (notification) => notification.isWeather || notification.hasDot
       );
+    } else if (importantFilter && weatherFilter) {
+      filteredNotifications = filteredNotifications.filter(
+        (notification) => notification.hasExclamation || notification.isWeather
+      )
     } else if (importantFilter) {
       // Filter important notifications
       filteredNotifications = filteredNotifications.filter(
@@ -152,7 +159,7 @@ export default function Recent() {
           justifyContent: "space-between",
           width: "100%",
           position: "absolute",
-          top: "15%",
+          top: "10%",
         }}
       >
         <Text style={styles.title}>RECENT</Text>

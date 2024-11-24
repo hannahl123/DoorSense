@@ -1,8 +1,17 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
-import { useTheme } from "@/components/ThemeContext";
+import { Tabs, Slot } from "expo-router";
+import { Colors } from "@/constants/Colors";
+import { ThemeProvider, useTheme } from "@/components/ThemeContext"; // Make sure to import useTheme here
 
-export default function TabsLayout() {
+export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      <Slot/>
+    </ThemeProvider>
+  );
+}
+
+function ContentWithTheme() {
   const { colors } = useTheme();
 
   return (
