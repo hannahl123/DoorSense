@@ -1,0 +1,16 @@
+CREATE TABLE activity_log (
+    id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    activity VARCHAR(255) NOT NULL,
+    time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+);
+CREATE TABLE notifications (
+    id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    important TINYINT(1) NOT NULL,
+    weather TINYINT(1) NOT NULL,
+    visitor TINYINT(1) NOT NULL,
+    parcel TINYINT(1) NOT NULL,
+    reminders TINYINT(1) NOT NULL,
+    unread TINYINT(1) NOT NULL,
+    date DATE NOT NULL,
+);
