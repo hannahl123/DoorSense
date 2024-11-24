@@ -58,6 +58,76 @@ export default function Recent() {
       hasDot: false,
       isWeather: true,
     },
+    {
+      title: "Rain starting soon",
+      details: null,
+      imageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewZsKrVeHBvxcN-xEFaQOoHfjc9Z-AsgIOw&s",
+      date: "2024-11-18",
+      hasExclamation: false,
+      hasDot: false,
+      isWeather: true,
+    },
+    {
+      title: "Rain starting soon",
+      details: null,
+      imageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewZsKrVeHBvxcN-xEFaQOoHfjc9Z-AsgIOw&s",
+      date: "2024-11-18",
+      hasExclamation: false,
+      hasDot: false,
+      isWeather: true,
+    },
+    {
+      title: "Rain starting soon",
+      details: null,
+      imageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewZsKrVeHBvxcN-xEFaQOoHfjc9Z-AsgIOw&s",
+      date: "2024-11-18",
+      hasExclamation: false,
+      hasDot: false,
+      isWeather: true,
+    },
+    {
+      title: "Rain starting soon",
+      details: null,
+      imageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewZsKrVeHBvxcN-xEFaQOoHfjc9Z-AsgIOw&s",
+      date: "2024-11-18",
+      hasExclamation: false,
+      hasDot: false,
+      isWeather: true,
+    },
+    {
+      title: "Rain starting soon",
+      details: null,
+      imageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewZsKrVeHBvxcN-xEFaQOoHfjc9Z-AsgIOw&s",
+      date: "2024-11-18",
+      hasExclamation: false,
+      hasDot: false,
+      isWeather: true,
+    },
+    {
+      title: "Rain starting soon",
+      details: null,
+      imageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewZsKrVeHBvxcN-xEFaQOoHfjc9Z-AsgIOw&s",
+      date: "2024-11-18",
+      hasExclamation: false,
+      hasDot: false,
+      isWeather: true,
+    },
+    {
+      title: "Rain starting soon",
+      details: null,
+      imageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRewZsKrVeHBvxcN-xEFaQOoHfjc9Z-AsgIOw&s",
+      date: "2024-11-18",
+      hasExclamation: false,
+      hasDot: false,
+      isWeather: true,
+    },
   ];
 
   const [notifications, setNotifications] =

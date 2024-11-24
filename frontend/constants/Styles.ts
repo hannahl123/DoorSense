@@ -76,8 +76,10 @@ export const useStyles = () => {
       flex: 1,
       paddingVertical: "3%",
       backgroundColor: colors.background,
-      maxHeight: "75%",
+      maxHeight: "85%",
       width: "100%",
+      position: 'absolute', 
+      top: '22%', 
     },
     notification: {
       flexDirection: "row",
