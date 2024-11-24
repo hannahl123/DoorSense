@@ -1,27 +1,34 @@
 import React, { createContext, useContext, useState } from "react";
+import { getColors } from "@/constants/Colors";
 
-type Theme = "light" | "dark";
-
-const ThemeContext = createContext<{
-  theme: Theme;
+type Theme = {
+  colors: ReturnType<typeof getColors>; // Infer the shape of the colors object
   toggleTheme: () => void;
-}>({
-  theme: "light",
-  toggleTheme: () => {},
-});
+};
+
+const ThemeContext = createContext<Theme | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [themeMode, setThemeMode] = useState<"light" | "dark">("light");
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setThemeMode((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
+  const theme = {
+    colors: getColors(themeMode),
+    toggleTheme,
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
   );
 };
 
-export const useTheme = () => useContext(ThemeContext);
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+  return context;
+};

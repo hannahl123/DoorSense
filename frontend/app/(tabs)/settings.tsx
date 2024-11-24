@@ -10,11 +10,13 @@ import {
   setPushNotifications,
 } from "@/lib/storage";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
+import { useTheme } from "@/components/ThemeContext";
 
 export default function Settings() {
-
   const styles = useStyles();
   const router = useExpoRouter();
+  const { toggleTheme, colors } = useTheme();
+
   const handlePress = () => {
     console.log("Button pressed");
     router.push("/about");
@@ -65,9 +67,10 @@ export default function Settings() {
         <Text style={styles.optionText}>DARK MODE</Text>
         <TouchableOpacity
           onPress={async () => {
+            toggleTheme();
             await setDarkMode(!(await getDarkMode()));
             console.log(`dark mode: ${await getDarkMode()}`);
-            alert("Coming later, be patient bruh");
+            //alert("Coming later, be patient bruh");
           }}
         >
           <MaterialIcons name="contrast" style={styles.settings_icon} />

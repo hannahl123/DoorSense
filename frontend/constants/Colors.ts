@@ -10,7 +10,7 @@ export const Colors = {
     icon: '#1E6091', 
   },
   dark: {
-    primary: '#FFFFFF', 
+    primary: '#FFF', 
     secondary: '#52B69A', 
     background: '#1E6091', 
     icon: '#1E6091', 
