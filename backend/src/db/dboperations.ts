@@ -20,8 +20,9 @@ export async function GetNotificationsbyCategories(
             `
             SELECT * 
             FROM notifications 
-            // WHERE (important = ? OR weather = ? OR visitor = ? OR parcel = ? OR reminders = ? OR unread = ?)
-            // AND date >= ? AND date <= ?
+            WHERE (important = ? OR weather = ? OR visitor = ? OR parcel = ? OR reminders = ? OR unread = ?)
+            AND date >= ? AND date <= ?
+            ORDER BY date DESC
             `,
             [important, weather, visitor, parcel, reminders, unread, start_date, end_date]
         );
