@@ -20,10 +20,13 @@ export async function GetNotificationsbyCategories(
             `
             SELECT * 
             FROM notifications 
-            WHERE (important = ? OR weather = ? OR visitor = ? OR parcel = ? OR reminders = ? OR unread = ?)
-            AND date >= ? AND date <= ?`,
+            // WHERE (important = ? OR weather = ? OR visitor = ? OR parcel = ? OR reminders = ? OR unread = ?)
+            // AND date >= ? AND date <= ?
+            `,
             [important, weather, visitor, parcel, reminders, unread, start_date, end_date]
         );
+        console.log(important)
+        console.log(results);
         return results.map(
             (result: any) =>
                 new Notification(
@@ -166,6 +169,42 @@ export async function GetNotificationsbyId(
                     result.image
                 )
         );
+    } catch (err) {
+        console.error("Database query error:", err);
+        throw err;
+    }
+}
+
+
+export async function ToggleUnread(id: number): Promise<boolean> {
+    try {
+        const [notification] = await pool.query(
+            `
+            SELECT unread 
+            FROM notifications 
+            WHERE id = ?`,
+            [id]
+        );
+
+        if (!notification) {
+            console.error(`Notification with ID ${id} not found.`);
+            throw new Error(`Notification with ID ${id} does not exist.`);
+        }
+
+        const newUnreadValue = notification.unread === 1 ? 0 : 1;
+
+        const result = await pool.query(
+            `
+            UPDATE notifications 
+            SET unread = ? 
+            WHERE id = ?`,
+            [newUnreadValue, id]
+        );
+
+        console.log(
+            `Notification with ID ${id} unread property toggled to ${newUnreadValue}.`
+        );
+        return result.affectedRows > 0;
     } catch (err) {
         console.error("Database query error:", err);
         throw err;
