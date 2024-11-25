@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsc --watch"
+    "dev": "nodemon --watch src -e ts --exec ts-node src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -15,10 +15,13 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/multer": "^1.4.12",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "express": "^4.21.1",
     "mariadb": "^3.4.0",
     "multer": "^1.4.5-lts.1"
   }

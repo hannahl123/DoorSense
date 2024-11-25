@@ -1,9 +1,9 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import { logger } from './middleware/logger';
-import notificationRoutes from './routes/NotificationRoutes';
-import activityRoutes from './routes/ActivityRoutes';
-import cors from 'cors';
+import express from "express";
+import bodyParser from "body-parser";
+import { logger } from "./middleware/logger";
+import notificationRoutes from "./routes/NotificationRoutes";
+import activityRoutes from "./routes/ActivityRoutes";
+import cors from "cors";
 
 const app = express();
 app.use(cors());
@@ -13,17 +13,18 @@ app.use(bodyParser.json());
 app.use(logger);
 
 // Routes
-app.use('/notifications', notificationRoutes);
-app.use('/activities', activityRoutes);
+app.use("/notifications", notificationRoutes);
+app.use("/activities", activityRoutes);
 
 // Default Route
-app.get('/', (req, res) => {
-    res.send('Homepage for Doorsense api!');
+app.get("/", (req, res) => {
+    res.send("Homepage for Doorsense api!");
 });
 
-app.get('/biancafarm', (req, res) => {
-    res.set('Content-Type', 'text/html');
-        res.send(Buffer.from(`
+app.get("/biancafarm", (req, res) => {
+    res.set("Content-Type", "text/html");
+    res.send(
+        Buffer.from(`
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -61,6 +62,8 @@ app.get('/biancafarm', (req, res) => {
                 <div class="animal" onclick="showSound('Woof!')">Dog</div>
                 <div class="animal" onclick="showSound('Baa!')">Sheep</div>
                 <div class="animal" onclick="showSound('Neigh!')">Horse</div>
+                <div class="animal" onclick="showSound('Bai Bai!')">Bianca</div>
+                <div class="animal" onclick="showSound('Ouch!')">Evan when smacked by Bianca on Monday</div>
     
                 <div id="output"></div>
     
@@ -72,6 +75,7 @@ app.get('/biancafarm', (req, res) => {
                 </script>
             </body>
             </html>
-        `));
-    });
+        `)
+    );
+});
 export default app;
