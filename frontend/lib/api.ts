@@ -6,6 +6,7 @@ export async function getActivities(limit?: number) {
   try {
     const params = limit ? { limit } : {};
     const response = await axios.get(`${API_ENDPOINT}/activities`, { params });
+    console.log(`response.data: ${JSON.stringify(response.data)}`);
     return response.data;
   } catch (error) {
     console.error(`Error experienced when fetching activities:\n${error}`);
@@ -14,16 +15,24 @@ export async function getActivities(limit?: number) {
 }
 
 export async function getNotifications(
-  important?: boolean,
-  parcel?: boolean,
-  start_date?: Date,
-  end_date?: Date
+  important: boolean = true,
+  weather: boolean = true,
+  visitor: boolean = true,
+  parcel: boolean = true,
+  reminders: boolean = true,
+  unread: boolean = true,
+  start_date: Date = new Date("1970-01-01"),
+  end_date: Date = new Date("9999-12-31")
 ) {
   try {
     const response = await axios.get(`${API_ENDPOINT}/notifications`, {
       params: {
-        important: important,
-        parcel: parcel,
+        important: Number(important),
+        weather: Number(weather),
+        visitor: Number(visitor),
+        parcel: Number(parcel),
+        reminders: Number(reminders),
+        unread: Number(unread),
         start_date: start_date,
         end_date: end_date,
       },

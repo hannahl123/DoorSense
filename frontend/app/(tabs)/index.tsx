@@ -6,7 +6,7 @@ import { Video } from "expo-av";
 import * as api from "@/lib/api";
 
 type Notification = {
-  title: string;
+  activity: string;
   // details: string | null;
   // imageUrl: string | null;
   date: string;
@@ -70,7 +70,9 @@ export default function Index() {
       <ScrollView style={styles.activityLog}>
         {notifications.map((notification, index) => (
           <View key={index} style={styles.notificationContainer}>
-            <Text style={styles.notificationTitle}>{notification.title}</Text>
+            <Text style={styles.notificationTitle}>
+              {notification.activity}
+            </Text>
             <Text style={styles.notificationDetails}>
               {notification.date} {notification.time}
             </Text>

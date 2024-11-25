@@ -18,11 +18,10 @@ export default function Recent() {
   type Notification = {
     id: number;
     title: string;
-    details: string | null;
     imageUrl: string | null;
     date: string;
-    hasExclamation: boolean;
-    hasDot: boolean;
+    important: boolean;
+    unread: boolean;
     isWeather: boolean;
   };
 
@@ -96,7 +95,7 @@ export default function Recent() {
   const openModal = (notification: Notification) => {
     setNotifications((prev) =>
       prev.map((item) =>
-        item === notification ? { ...item, hasDot: false } : item
+        item === notification ? { ...item, unread: false } : item
       )
     );
     setSelectedNotification(notification);
@@ -125,31 +124,31 @@ export default function Recent() {
     if (importantFilter && unreadFilter && weatherFilter) {
       filteredNotifications = filteredNotifications.filter(
         (notification) =>
-          notification.hasDot ||
-          notification.hasExclamation ||
+          notification.unread ||
+          notification.important ||
           notification.isWeather
       );
     } else if (importantFilter && unreadFilter) {
       filteredNotifications = filteredNotifications.filter(
-        (notification) => notification.hasExclamation || notification.hasDot
+        (notification) => notification.important || notification.unread
       );
     } else if (weatherFilter && unreadFilter) {
       filteredNotifications = filteredNotifications.filter(
-        (notification) => notification.isWeather || notification.hasDot
+        (notification) => notification.isWeather || notification.unread
       );
     } else if (importantFilter && weatherFilter) {
       filteredNotifications = filteredNotifications.filter(
-        (notification) => notification.hasExclamation || notification.isWeather
+        (notification) => notification.important || notification.isWeather
       );
     } else if (importantFilter) {
       // Filter important notifications
       filteredNotifications = filteredNotifications.filter(
-        (notification) => notification.hasExclamation
+        (notification) => notification.important
       );
     } else if (unreadFilter) {
       // Filter unread notifications
       filteredNotifications = filteredNotifications.filter(
-        (notification) => notification.hasDot
+        (notification) => notification.unread
       );
     } else if (weatherFilter) {
       // Filter weather notifications
@@ -197,14 +196,12 @@ export default function Recent() {
             onPress={() => openModal(notification)}
           >
             <View style={{ flexDirection: "row" }}>
-              {notification.hasDot && <View style={styles.dot} />}
+              {notification.unread && <View style={styles.dot} />}
               <Text style={styles.body}>{notification.title}</Text>
             </View>
 
             <View style={styles.icons}>
-              {notification.hasExclamation && (
-                <Text style={styles.warning}>!</Text>
-              )}
+              {notification.important && <Text style={styles.warning}>!</Text>}
             </View>
           </TouchableOpacity>
         ))}
