@@ -67,4 +67,3 @@ tflite_model = converter.convert()
 # Save the TFLite model
 with open('custom_model.tflite', 'wb') as f:
     f.write(tflite_model)
-
