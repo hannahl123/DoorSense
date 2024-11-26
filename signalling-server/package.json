@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.13",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2"
+  },
+  "scripts": {
+    "dev": "nodemon --watch src -e ts --exec ts-node src/index.ts"
+  }
+}
