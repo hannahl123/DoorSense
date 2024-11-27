@@ -1,9 +1,10 @@
 import os
 import pathlib
+import cv2
 
 # setup
 dir = os.path.dirname(__file__)
-interpreter = None
+interpreter = None # define interpreter based on platform
 def is_raspPI(): return pathlib.Path("/etc/rpi-issue").exists()
 print("Is Raspberry Pi: "+str(is_raspPI()))
 if is_raspPI():
@@ -20,11 +21,30 @@ interpreter.allocate_tensors()
 # get input and output tensors
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
-
-# test the model on random input data
 input_shape = input_details[0]["shape"]
-input_data = np.array(np.random.random_sample(input_shape), dtype=np.int8)
-interpreter.set_tensor(input_details[0]["index"], input_data)
 
-# invoke interpreter
-interpreter.invoke()
+cv2.namedWindow("Preview")
+vc = cv2.VideoCapture(0)
+
+rval, frame = False, None
+if vc.isOpened(): # try to get the first frame
+    rval, frame = vc.read()
+else:
+    rval = False
+
+while rval:
+    cv2.imshow("Preview", frame)
+    rval, frame = vc.read()
+    frame = cv2.resize(frame, (input_shape[2], input_shape[1]))
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    frame_int8 = frame.astype(np.int8)
+    frame_int8 = np.expand_dims(frame_int8, axis=-1)
+    interpreter.set_tensor(input_details[0]["index"], frame_int8)
+    interpreter.invoke()
+    key = cv2.waitKey(20)
+    if key == 27: # exit on ESC
+        break
+
+# close opencv
+vc.release()
+cv2.destroyWindow("Preview")
