@@ -16,6 +16,7 @@ pip install tflite-model-maker (maybe doesn't work)
 pip install tensorflow (on computer)
 pip install tflite-runtime (on edge device)
 pip install gpiozero (on Raspberry Pi)
+pip install opencv-python
 
 Possible Datasets:
 - Parcel Detection: https://studio.edgeimpulse.com/public/103841/latest
