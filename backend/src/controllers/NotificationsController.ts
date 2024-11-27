@@ -50,3 +50,9 @@ export async function GetNotificationsById(
 ): Promise<Notification[]> {
     return await db.GetNotificationsbyId(id);
 }
+
+export async function ToggleUnread(
+    id: number
+): Promise<boolean> {
+    return await db.ToggleUnread(id);
+}

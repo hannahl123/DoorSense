@@ -100,10 +100,29 @@ router.get('/image/:id', async (req, res, next) => {
             return;
         }
 
-        res.set('Content-Type', 'image/png'); // Change MIME type based on stored image format
+        res.set('Content-Type', 'image/png');
         res.send(notification[0].image);
     } catch (err) {
         next(err);
+    }
+});
+
+router.patch('/:id/unread',  async (req, res, next) => {
+    try {
+        const id = parseInt(req.params.id, 10);
+        if (isNaN(id)) {
+            res.status(400).json({ error: 'Invalid notification ID' });
+            return;
+        }
+        const success = await NotificationController.ToggleUnread(id);
+        if (success) {
+            res.status(200).json({ message: `Notification with ID ${id} toggled successfully.` });
+        } else {
+            res.status(404).json({ error: `Notification with ID ${id} not found.` });
+        }
+    } catch (error) {
+        console.error('Error toggling unread property:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 

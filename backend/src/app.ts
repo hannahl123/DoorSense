@@ -63,6 +63,7 @@ app.get("/biancafarm", (req, res) => {
                 <div class="animal" onclick="showSound('Baa!')">Sheep</div>
                 <div class="animal" onclick="showSound('Neigh!')">Horse</div>
                 <div class="animal" onclick="showSound('Bai Bai!')">Bianca</div>
+                <div class="animal" onclick="showSound('Ouch!')">Evan when smacked by Bianca on Monday</div>
     
                 <div id="output"></div>
     
