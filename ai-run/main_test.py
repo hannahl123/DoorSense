@@ -36,9 +36,11 @@ while rval:
     cv2.imshow("Preview", frame)
     rval, frame = vc.read()
     frame = cv2.resize(frame, (input_shape[2], input_shape[1]))
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    if input_shape[3] == 1:
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        frame = np.expand_dims(frame, axis=-1)
     frame_int8 = frame.astype(np.int8)
-    frame_int8 = np.expand_dims(frame_int8, axis=-1)
+    frame_int8 = np.expand_dims(frame_int8, axis=0)
     interpreter.set_tensor(input_details[0]["index"], frame_int8)
     interpreter.invoke()
     key = cv2.waitKey(20)
