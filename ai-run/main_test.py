@@ -1,6 +1,7 @@
 import os
 import pathlib
 import cv2
+import numpy as np
 
 # setup
 dir = os.path.dirname(__file__)
@@ -11,7 +12,6 @@ if is_raspPI():
     import tflite_runtime.interpreter as tfl_interpreter
     interpreter = tfl_interpreter.Interpreter(dir+"/model/parcel_detection.lite")
 else:
-    import numpy as np
     import tensorflow as tf
     interpreter = tf.lite.Interpreter(dir+"/model/parcel_detection.lite")
 
