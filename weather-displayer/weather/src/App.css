@@ -8,6 +8,7 @@ html, body {
 .App {
   text-align: center;
   padding: 35px 15px;
+  padding-top: 25px;
   height: 100%; 
   box-sizing: border-box; 
 }
@@ -19,11 +20,14 @@ html, body {
 }
 
 .float-container {
+  margin-top: -15px;
   display: flex;
   align-items: center;
+  height: 100%;
 }
 
 .float-block-left {
+  height: 100%;
   width: 35%;
   float: left;
   font-size: 18px;
@@ -41,6 +45,7 @@ html, body {
 }
 
 .float-block-right {
+  height: 100%;
   width: 55%;
   float: left;
   vertical-align: center;
@@ -51,8 +56,10 @@ html, body {
 } 
 
 .weather-temperature {
-  font-size: 50px;
+  font-size: 60px;
   font-weight: bold;
+  padding-left: 20px;
+  padding-top: 10px;
 }
 
 .float-arrow-left {
@@ -71,6 +78,7 @@ html, body {
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left: 20px solid #52B69A;
+  margin-top: -10px;
 }
 
 .arrow-left {
@@ -79,9 +87,11 @@ html, body {
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent; 
   border-right:20px solid #52B69A;
+  margin-top: -20px;
 }
 
 .float-column {
+  padding-top: 8px;
   width: 18%;
   float: left;
   vertical-align: center;
@@ -90,6 +100,7 @@ html, body {
 } 
 
 .weather-icon-small {
+  margin-top: -5px;
   width: 80px;
   height: 80px;
 }
@@ -97,4 +108,10 @@ html, body {
 .temperature-text-small {
   font-size: 25px;
   font-weight: bold;
+  margin-top: -5px;
+  padding-bottom: 15px;
+}
+
+.current-time {
+  
 }

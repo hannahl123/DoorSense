@@ -5,7 +5,7 @@ function getWeatherData() {
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open(
     "GET",
-    "https://api.openweathermap.org/data/2.5/forecast?q=Waterloo&APPID=d97086b5aed80cbec2b6844624d90f9d",
+    "https://api.openweathermap.org/data/2.5/forecast?q=London&APPID=d97086b5aed80cbec2b6844624d90f9d",
     false
   ); // false for synchronous request
   xmlHttp.send(null);
@@ -23,13 +23,26 @@ function App() {
   const toggleScreen = () => {
     setOnScreen1((prev) => !prev);
   };
+  const getFormattedDate = () => {
+    const date = new Date();
+  };
+  const getFormattedTime = () => {
+
+  }
   const Screen1 = () => {
     const iconURL =
       "https://openweathermap.org/img/wn/" +
       weatherData["list"][0]["weather"][0]["icon"] +
       "@2x.png";
+    const getPrecipitation = () => {
+      let amount = 0;
+      if (weatherData["list"][0].hasOwnProperty("rain")) amount += weatherData["list"][0]["rain"]["3h"];
+      if (weatherData["list"][0].hasOwnProperty("snow")) amount += weatherData["list"][0]["snow"]["3h"];
+      return amount;
+    };
     return (
       <div className="App">
+        <div className="current-time"></div>
         <div className="title">DOORSENSE</div>
         <br />
         <div className="float-container">
@@ -50,12 +63,22 @@ function App() {
               )}
               º
             </div>
-            <br />
             Feels Like:{" "}
             {Math.round(
               kelvinToCelsius(weatherData["list"][0]["main"]["feels_like"])
             )}
             º
+            <br />
+            H:{" "}
+            {Math.round(
+              kelvinToCelsius(weatherData["list"][0]["main"]["temp_max"])
+            )}
+            &nbsp; L:{" "}
+            {Math.round(
+              kelvinToCelsius(weatherData["list"][0]["main"]["temp_min"])
+            )}
+            <br />
+            🌧️{Math.round(getPrecipitation()) + "mm"}
           </div>
           <div className="float-arrow-right">
             <div className="arrow-right" onClick={toggleScreen}></div>
@@ -72,11 +95,21 @@ function App() {
       "https://openweathermap.org/img/wn/" +
       weatherData["list"][index]["weather"][0]["icon"] +
       "@2x.png";
+    const getPrecipitation = () => {
+      let amount = 0;
+      if (weatherData["list"][index].hasOwnProperty("rain")) amount += weatherData["list"][index]["rain"]["3h"];
+      if (weatherData["list"][index].hasOwnProperty("snow")) amount += weatherData["list"][index]["snow"]["3h"];
+      return amount;
+    };
+
     return (
       <div className="float-column">
         {timeHours <= 12 ? timeHours + "am" : timeHours - 12 + "pm"}
         <img className="weather-icon-small" src={iconURL} />
-        <div className="temperature-text-small">2º</div>
+        <div className="temperature-text-small">{Math.round(kelvinToCelsius(weatherData["list"][index]["main"]["temp"]))}º</div>
+        Feels {Math.round(kelvinToCelsius(weatherData["list"][index]["main"]["feels_like"]))}º
+        <br />
+        🌧{Math.round(getPrecipitation()) + "mm"}
       </div>
     );
   };
