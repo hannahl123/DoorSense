@@ -1,0 +1,100 @@
+html, body {
+  background-color: #c1def6;
+  height: 100%;
+  margin: 0; 
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+  padding: 35px 15px;
+  height: 100%; 
+  box-sizing: border-box; 
+}
+
+.title {
+  color: #1E6091;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.float-container {
+  display: flex;
+  align-items: center;
+}
+
+.float-block-left {
+  width: 35%;
+  float: left;
+  font-size: 18px;
+  color: #52B69A;
+  padding-left: 20px;
+} 
+
+.weather-icon {
+  width: 120px;
+  height: 120px;
+}
+
+.weather-type {
+  margin-top: -15px;
+}
+
+.float-block-right {
+  width: 55%;
+  float: left;
+  vertical-align: center;
+  font-size: 18px;
+  color: #52B69A;
+  padding-top: 20px;
+  padding-right: 10px;
+} 
+
+.weather-temperature {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.float-arrow-left {
+  width: 5%;
+  float: left;
+}
+
+.float-arrow-right {
+  width: 5%;
+  float: left;
+}
+
+.arrow-right {
+  width: 0; 
+  height: 0; 
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid #52B69A;
+}
+
+.arrow-left {
+  width: 0; 
+  height: 0; 
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent; 
+  border-right:20px solid #52B69A;
+}
+
+.float-column {
+  width: 18%;
+  float: left;
+  vertical-align: center;
+  font-size: 16px;
+  color: #52B69A;
+} 
+
+.weather-icon-small {
+  width: 80px;
+  height: 80px;
+}
+
+.temperature-text-small {
+  font-size: 25px;
+  font-weight: bold;
+}
