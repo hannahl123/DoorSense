@@ -23,7 +23,7 @@ input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 input_shape = input_details[0]["shape"]
 
-cv2.namedWindow("Preview")
+# cv2.namedWindow("Preview")
 vc = cv2.VideoCapture(0)
 
 rval, frame = False, None
@@ -33,7 +33,7 @@ else:
     rval = False
 
 while rval:
-    cv2.imshow("Preview", frame)
+    # cv2.imshow("Preview", frame)
     rval, frame = vc.read()
     frame = cv2.resize(frame, (input_shape[2], input_shape[1]))
     if input_shape[3] == 1:
@@ -44,8 +44,11 @@ while rval:
     interpreter.set_tensor(input_details[0]["index"], frame_int8)
     interpreter.invoke()
     key = cv2.waitKey(20)
-    if key == 27: # exit on ESC
-        break
+    output = interpreter.get_tensor(output_details[0]['index'])[0]
+    print(output)
+
+    # if key == 27: # exit on ESC
+    #     break
 
 # close opencv
 vc.release()
