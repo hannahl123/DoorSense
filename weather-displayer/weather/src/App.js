@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function getWeatherData() {
@@ -17,18 +17,27 @@ function kelvinToCelsius(kelvin) {
 }
 
 function App() {
-  let weatherData = getWeatherData();
+  const [weatherData, setWeatherData] = useState(getWeatherData());
+  useEffect(() => {
+    setInterval(() => setWeatherData(getWeatherData()), 60000);
+  }, []);
 
   const [onScreen1, setOnScreen1] = useState(true);
   const toggleScreen = () => {
     setOnScreen1((prev) => !prev);
   };
+
+  const [currentDate, setCurrentDate] = useState(new Date());
+  useEffect(() => {
+    setInterval(() => setCurrentDate(new Date()), 100);
+  }, []);
+
   const getFormattedDate = () => {
-    const date = new Date();
+    return currentDate.toLocaleDateString();
   };
   const getFormattedTime = () => {
-
-  }
+    return currentDate.toLocaleTimeString();
+  };
   const Screen1 = () => {
     const iconURL =
       "https://openweathermap.org/img/wn/" +
@@ -36,13 +45,16 @@ function App() {
       "@2x.png";
     const getPrecipitation = () => {
       let amount = 0;
-      if (weatherData["list"][0].hasOwnProperty("rain")) amount += weatherData["list"][0]["rain"]["3h"];
-      if (weatherData["list"][0].hasOwnProperty("snow")) amount += weatherData["list"][0]["snow"]["3h"];
+      if (weatherData["list"][0].hasOwnProperty("rain"))
+        amount += weatherData["list"][0]["rain"]["3h"];
+      if (weatherData["list"][0].hasOwnProperty("snow"))
+        amount += weatherData["list"][0]["snow"]["3h"];
       return amount;
     };
     return (
       <div className="App">
-        <div className="current-time"></div>
+        <div className="current-date">{getFormattedDate()}</div>
+        <div className="current-time">{getFormattedTime()}</div>
         <div className="title">DOORSENSE</div>
         <br />
         <div className="float-container">
@@ -73,12 +85,13 @@ function App() {
             {Math.round(
               kelvinToCelsius(weatherData["list"][0]["main"]["temp_max"])
             )}
-            &nbsp; L:{" "}
+            º &nbsp; L:{" "}
             {Math.round(
               kelvinToCelsius(weatherData["list"][0]["main"]["temp_min"])
             )}
+            º
             <br />
-            🌧️{Math.round(getPrecipitation()) + "mm"}
+            🌧️ {Math.round(getPrecipitation()) + "mm"}
           </div>
           <div className="float-arrow-right">
             <div className="arrow-right" onClick={toggleScreen}></div>
@@ -97,8 +110,10 @@ function App() {
       "@2x.png";
     const getPrecipitation = () => {
       let amount = 0;
-      if (weatherData["list"][index].hasOwnProperty("rain")) amount += weatherData["list"][index]["rain"]["3h"];
-      if (weatherData["list"][index].hasOwnProperty("snow")) amount += weatherData["list"][index]["snow"]["3h"];
+      if (weatherData["list"][index].hasOwnProperty("rain"))
+        amount += weatherData["list"][index]["rain"]["3h"];
+      if (weatherData["list"][index].hasOwnProperty("snow"))
+        amount += weatherData["list"][index]["snow"]["3h"];
       return amount;
     };
 
@@ -106,16 +121,27 @@ function App() {
       <div className="float-column">
         {timeHours <= 12 ? timeHours + "am" : timeHours - 12 + "pm"}
         <img className="weather-icon-small" src={iconURL} />
-        <div className="temperature-text-small">{Math.round(kelvinToCelsius(weatherData["list"][index]["main"]["temp"]))}º</div>
-        Feels {Math.round(kelvinToCelsius(weatherData["list"][index]["main"]["feels_like"]))}º
+        <div className="temperature-text-small">
+          {Math.round(
+            kelvinToCelsius(weatherData["list"][index]["main"]["temp"])
+          )}
+          º
+        </div>
+        Feels{" "}
+        {Math.round(
+          kelvinToCelsius(weatherData["list"][index]["main"]["feels_like"])
+        )}
+        º
         <br />
-        🌧{Math.round(getPrecipitation()) + "mm"}
+        🌧 {Math.round(getPrecipitation()) + "mm"}
       </div>
     );
   };
   const Screen2 = () => {
     return (
       <div className="App">
+        <div className="current-date">{getFormattedDate()}</div>
+        <div className="current-time">{getFormattedTime()}</div>
         <div className="title">DOORSENSE</div>
         <br />
         <div className="float-container">
