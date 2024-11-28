@@ -31,7 +31,7 @@ html, body {
   width: 35%;
   float: left;
   font-size: 18px;
-  color: #52B69A;
+  color: #28a27f;
   padding-left: 20px;
 } 
 
@@ -50,7 +50,7 @@ html, body {
   float: left;
   vertical-align: center;
   font-size: 18px;
-  color: #52B69A;
+  color: #28a27f;
   padding-top: 10px;
   padding-right: 10px;
 } 
@@ -77,7 +77,7 @@ html, body {
   height: 0; 
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
-  border-left: 20px solid #52B69A;
+  border-left: 20px solid #28a27f;
   margin-top: -5px;
 }
 
@@ -86,7 +86,7 @@ html, body {
   height: 0; 
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent; 
-  border-right:20px solid #52B69A;
+  border-right:20px solid #28a27f;
   margin-top: -25px;
 }
 
@@ -96,7 +96,7 @@ html, body {
   float: left;
   vertical-align: center;
   font-size: 16px;
-  color: #52B69A;
+  color: #28a27f;
 } 
 
 .weather-icon-small {
