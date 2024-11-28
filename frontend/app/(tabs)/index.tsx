@@ -66,7 +66,7 @@ export default function Index() {
   
     // Combine date and time
     return {
-      date: `${year}-${day}-${month}`,
+      date: `${year}-${month}-${day}`,
       time,
     };
   }
