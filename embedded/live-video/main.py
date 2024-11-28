@@ -61,5 +61,5 @@ class RPiVideoStream:
 
 
 if __name__ == "__main__":
-    streamer = RPiVideoStream("http://localhost:8080")
+    streamer = RPiVideoStream("http://10.20.104.1:8080")
     streamer.stream_video()
