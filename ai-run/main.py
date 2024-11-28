@@ -52,4 +52,4 @@ while rval:
 
 # close opencv
 vc.release()
-cv2.destroyWindow("Preview")
+# cv2.destroyWindow("Preview")
