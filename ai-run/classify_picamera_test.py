@@ -92,15 +92,18 @@ def main():
     #     finally:
     #         camera.stop_preview()
     
+    print("Connecting...")
     ip_addr = '192.168.2.29'
     stream_url = 'http://' + ip_addr + ':81/stream'
     res = requests.get(stream_url, stream=True)
+    print("Connected")
     for chunk in res.iter_content(chunk_size=100000):
         if len(chunk) > 100:
             try:
                 start_time = time.time()
                 img_data = BytesIO(chunk)
                 cv_img = cv2.imdecode(np.frombuffer(img_data.read(), np.uint8), 1)
+                print(cv_img)
                 cv_resized_img = cv2.resize(cv_img, (width, height), interpolation = cv2.INTER_AREA)
                 results = classify_image(interpreter, cv_resized_img)
                 elapsed_ms = (time.time() - start_time) * 1000
