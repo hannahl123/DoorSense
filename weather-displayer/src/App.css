@@ -1,0 +1,127 @@
+html, body {
+  background-color: #c1def6;
+  height: 100%;
+  margin: 0; 
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+  padding: 35px 15px;
+  padding-top: 30px;
+  height: 100%; 
+  box-sizing: border-box; 
+}
+
+.title {
+  color: #1E6091;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.float-container {
+  margin-top: -15px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.float-block-left {
+  height: 100%;
+  width: 35%;
+  float: left;
+  font-size: 18px;
+  color: #52B69A;
+  padding-left: 20px;
+} 
+
+.weather-icon {
+  width: 120px;
+  height: 120px;
+}
+
+.weather-type {
+  margin-top: -15px;
+}
+
+.float-block-right {
+  height: 100%;
+  width: 55%;
+  float: left;
+  vertical-align: center;
+  font-size: 18px;
+  color: #52B69A;
+  padding-top: 10px;
+  padding-right: 10px;
+} 
+
+.weather-temperature {
+  font-size: 60px;
+  font-weight: bold;
+  padding-left: 20px;
+  padding-top: 10px;
+}
+
+.float-arrow-left {
+  width: 5%;
+  float: left;
+}
+
+.float-arrow-right {
+  width: 5%;
+  float: left;
+}
+
+.arrow-right {
+  width: 0; 
+  height: 0; 
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid #52B69A;
+  margin-top: -5px;
+}
+
+.arrow-left {
+  width: 0; 
+  height: 0; 
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent; 
+  border-right:20px solid #52B69A;
+  margin-top: -25px;
+}
+
+.float-column {
+  padding-top: 8px;
+  width: 18%;
+  float: left;
+  vertical-align: center;
+  font-size: 16px;
+  color: #52B69A;
+} 
+
+.weather-icon-small {
+  margin-top: -5px;
+  width: 80px;
+  height: 80px;
+}
+
+.temperature-text-small {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: -5px;
+  padding-bottom: 15px;
+}
+
+.current-date {
+  position: absolute;
+  top: 2px;
+  left: 8px;
+  color: #1E6091;
+}
+
+.current-time {
+  position: absolute;
+  top: 2px;
+  right :8px;
+  color: #1E6091;
+}
