@@ -42,7 +42,6 @@ export default function Index() {
     */
   ]);
   const [currentFrame, setCurrentFrame] = useState<string | null>(null);
-  const [pause, setPause] = useState(false);
 
   useEffect(() => {
     const loadNotifications = async () =>
@@ -59,8 +58,6 @@ export default function Index() {
 
     // listen for incoming video frames
     socket.on("video_stream", (data: string) => {
-      if (pause) return;
-      // console.log("Received video frame:", data);
       setCurrentFrame(`data:image/jpeg;base64,${data}`);
     });
 
@@ -74,19 +71,12 @@ export default function Index() {
       <Text style={[styles.title, { paddingTop: "25%" }]}>DOORSENSE</Text>
       <Text style={[styles.header, { marginTop: "0%" }]}>LIVE</Text>
 
-      {/* <Pressable
-        onPress={() => {
-          console.log(`Pause: ${pause}`);
-          setPause(!pause);
-        }}
-      > */}
       <Image
         source={{ uri: currentFrame }}
         style={styles.video}
         // key={currentFrame} // Add key to force re-render
         cachePolicy="memory-disk"
       />
-      {/* </Pressable> */}
 
       {/* Event Log */}
       <Text style={[styles.header, { marginTop: "10%" }]}>ACTIVITY LOG</Text>
