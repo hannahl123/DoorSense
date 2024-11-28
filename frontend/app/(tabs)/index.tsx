@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, ScrollView, Image } from "react-native";
+import { Text, View, ScrollView } from "react-native";
+import { Image } from "expo-image";
 import { useStyles } from "@/constants/Styles";
-import { Video } from "expo-av";
 import io from "socket.io-client";
 
 import * as api from "@/lib/api";
@@ -42,23 +42,25 @@ export default function Index() {
     */
   ]);
   const [currentFrame, setCurrentFrame] = useState<string | null>(null);
+  const [pause, setPause] = useState(false);
 
-  // useEffect(() => {
-  //   const loadNotifications = async () =>
-  //     setNotifications(await api.getActivities());
+  useEffect(() => {
+    const loadNotifications = async () =>
+      setNotifications(await api.getActivities());
 
-  //   loadNotifications();
-  // }, []);
+    loadNotifications();
+  }, []);
 
   useEffect(() => {
     // establish WebSocket connection
-    const socket = io("https://loose-olives-argue.loca.lt", {
+    const socket = io("http://10.20.104.1:8080", {
       transports: ["websocket"],
     });
 
     // listen for incoming video frames
     socket.on("video_stream", (data: string) => {
-      console.log("Received video frame:", data);
+      if (pause) return;
+      // console.log("Received video frame:", data);
       setCurrentFrame(`data:image/jpeg;base64,${data}`);
     });
 
@@ -72,14 +74,19 @@ export default function Index() {
       <Text style={[styles.title, { paddingTop: "25%" }]}>DOORSENSE</Text>
       <Text style={[styles.header, { marginTop: "0%" }]}>LIVE</Text>
 
-      {currentFrame && (
-        <Image
-          source={{ uri: currentFrame }}
-          style={styles.video}
-          resizeMode="contain"
-          key={currentFrame} // Add key to force re-render
-        />
-      )}
+      {/* <Pressable
+        onPress={() => {
+          console.log(`Pause: ${pause}`);
+          setPause(!pause);
+        }}
+      > */}
+      <Image
+        source={{ uri: currentFrame }}
+        style={styles.video}
+        // key={currentFrame} // Add key to force re-render
+        cachePolicy="memory-disk"
+      />
+      {/* </Pressable> */}
 
       {/* Event Log */}
       <Text style={[styles.header, { marginTop: "10%" }]}>ACTIVITY LOG</Text>
