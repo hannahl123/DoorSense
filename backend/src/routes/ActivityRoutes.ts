@@ -3,11 +3,6 @@ import * as ActivityController from '../controllers/ActivityController';
 
 const router = Router();
 
-interface ActivityRequestBody {
-    activity: string;
-    time: string;
-}
-
 router.get('/',async (req, res) =>{
     try{
         const limit = Number(req.query.limit || 10);

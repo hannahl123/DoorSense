@@ -6,28 +6,51 @@ import {Activity} from '../models/Activity';
 const pool = mariadb.createPool(config);
 
 export async function GetNotificationsbyCategories(
-    important: number,
-    weather: number,
-    visitor: number,
-    parcel: number,
-    reminders: number,
-    unread: number,
-    start_date: string,
-    end_date: string
+    important: number | null,
+    weather: number | null,
+    visitor: number | null,
+    parcel: number | null,
+    reminders: number | null,
+    unread: number | null,
+    start_date: string | null,
+    end_date: string | null
 ): Promise<Notification[]> {
     try {
-        const results = await pool.query(
-            `
+        // Assign default values for start_date and end_date if not provided
+        const defaultStartDate = "1970-01-01"; // Very early date
+        const defaultEndDate = "9999-12-31"; // Very far future date
+
+        const query = `
             SELECT * 
             FROM notifications 
-            WHERE (important = ? OR weather = ? OR visitor = ? OR parcel = ? OR reminders = ? OR unread = ?)
-            AND date >= ? AND date <= ?
+            WHERE 
+                (important = ? OR ? IS NULL) AND
+                (weather = ? OR ? IS NULL) AND
+                (visitor = ? OR ? IS NULL) AND
+                (parcel = ? OR ? IS NULL) AND
+                (reminders = ? OR ? IS NULL) AND
+                (unread = ? OR ? IS NULL) AND
+                date >= ? AND date <= ?
             ORDER BY date DESC
-            `,
-            [important, weather, visitor, parcel, reminders, unread, start_date, end_date]
+        `;
+
+        // Use default dates if not provided
+        const results = await pool.query(
+            query,
+            [
+                important, important,
+                weather, weather,
+                visitor, visitor,
+                parcel, parcel,
+                reminders, reminders,
+                unread, unread,
+                start_date || defaultStartDate,
+                end_date || defaultEndDate,
+            ]
         );
-        console.log(important)
-        console.log(results);
+
+        // console.log("Query results:", results);
+
         return results.map(
             (result: any) =>
                 new Notification(

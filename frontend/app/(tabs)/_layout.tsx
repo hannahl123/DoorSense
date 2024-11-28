@@ -1,9 +1,18 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { useTheme } from "@/components/ThemeContext";
+// import { useNotification } from "../../hooks/useNotification";
+// import { registerDeviceToken } from "../../lib/notification";
+import React from "react";
 
 export default function TabsLayout() {
   const { colors } = useTheme();
+  // useNotification(); // Set up listeners for notifications
+
+  // React.useEffect(() => {
+  //   // Register the device token on app startup
+  //   registerDeviceToken();
+  // }, []);
 
   return (
     <Tabs

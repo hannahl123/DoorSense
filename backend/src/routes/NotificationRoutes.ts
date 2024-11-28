@@ -2,27 +2,43 @@ import { Router } from 'express';
 import * as NotificationController from '../controllers/NotificationsController';
 import { validateNotificationRequest } from '../middleware/validator';
 import upload from '../middleware/upload';
+// import { sendPushNotification } from "../services/PushNotificationService"; 
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
     try {
-        const { important, weather, visitor, parcel, reminders, unread, start_date, end_date } = req.query;
-        const notifications = await NotificationController.GetNotificationsByCategories(
-            Number(important || 0),
-            Number(weather || 0),
-            Number(visitor || 0),
-            Number(parcel || 0),
-            Number(reminders || 0),
-            Number(unread || 0),
-            start_date as string,
-            end_date as string
-        );
-        res.json(notifications);
+      const {
+        important,
+        weather,
+        visitor,
+        parcel,
+        reminders,
+        unread,
+        start_date,
+        end_date,
+      } = req.query;
+  
+      console.log("Received query parameters:", req.query);
+  
+      // Pass the query parameters to the controller
+      const notifications = await NotificationController.GetNotificationsByCategories(
+        Number(important) || null,
+        Number(weather) || null,
+        Number(visitor) || null,
+        Number(parcel) || null,
+        Number(reminders) || null,
+        Number(unread) || null,
+        start_date as string || "1970-01-01",
+        end_date as string || "9999-12-31"
+      );
+  
+      res.json(notifications);
     } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch notifications.' });
+      console.error("Error fetching notifications:", err);
+      res.status(500).json({ error: "Failed to fetch notifications." });
     }
-});
+  });
 
 router.post('/', upload.single('image'),validateNotificationRequest, async (req, res, next) => {
     try {
@@ -50,6 +66,11 @@ router.post('/', upload.single('image'),validateNotificationRequest, async (req,
             ? `${req.protocol}://${req.get('host')}/notifications/image/${id}`
             : null;
 
+                  // // Trigger push notification
+      // sendPushNotification(
+      //   title || "New Notification",
+      //   "A new notification has been added!"
+      // );
         res.status(201).json({ id, imageUrl });
     } catch (err) {
         console.error("Error creating notification:", err);
@@ -81,6 +102,7 @@ router.delete('/:id', async (req, res, next): Promise<void> => {
             res.status(404).json({ error: `Notification with ID ${id} not found.` });
         }
     } catch (err) {
+        console.error("Error fetching notifications:", err);
         next(err);
     }
 });

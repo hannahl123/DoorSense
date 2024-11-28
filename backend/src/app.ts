@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import { logger } from "./middleware/logger";
 import notificationRoutes from "./routes/NotificationRoutes";
 import activityRoutes from "./routes/ActivityRoutes";
+import detectionRoutes from "./routes/detectionRoutes";
+// import DeviceTokenRoutes from "./routes/detectionRoutes";
 import cors from "cors";
 
 const app = express();
@@ -15,6 +17,8 @@ app.use(logger);
 // Routes
 app.use("/notifications", notificationRoutes);
 app.use("/activities", activityRoutes);
+app.use('/ai', detectionRoutes);
+// app.use("/device-token", DeviceTokenRoutes);
 
 // Default Route
 app.get("/", (req, res) => {
@@ -63,7 +67,6 @@ app.get("/biancafarm", (req, res) => {
                 <div class="animal" onclick="showSound('Baa!')">Sheep</div>
                 <div class="animal" onclick="showSound('Neigh!')">Horse</div>
                 <div class="animal" onclick="showSound('Bai Bai!')">Bianca</div>
-                <div class="animal" onclick="showSound('Ouch!')">Evan when smacked by Bianca on Monday</div>
     
                 <div id="output"></div>
     

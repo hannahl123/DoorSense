@@ -23,6 +23,7 @@ export default function Recent() {
     important: boolean;
     unread: boolean;
     isWeather: boolean;
+    parcel: boolean; 
   };
 
   const initialNotifications: Notification[] = [
@@ -75,24 +76,51 @@ export default function Recent() {
     useState<Notification | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
 
-  // Fetch notifications
-  useEffect(() => {
-    const loadNotifications = async () =>
-      setNotifications(await api.getNotifications());
-    loadNotifications();
-  }, []);
+    // Filters
+    const [filterModalVisible, setFilterModalVisible] = useState(false);
+    const [importantFilter, setImportantFilter] = useState(false);
+    const [unreadFilter, setUnreadFilter] = useState(false);
+    const [parcelFilter, setParcelFilter] = useState(false);
+    const [startDate, setStartDate] = useState<Date | null>(null);
+    const [endDate, setEndDate] = useState<Date | null>(null);
+    const [showStartPicker, setShowStartPicker] = useState(false);
+    const [showEndPicker, setShowEndPicker] = useState(false);
 
-  // Filters
-  const [filterModalVisible, setFilterModalVisible] = useState(false);
-  const [importantFilter, setImportantFilter] = useState(false);
-  const [unreadFilter, setUnreadFilter] = useState(false);
-  const [weatherFilter, setWeatherFilter] = useState(false);
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const [showStartPicker, setShowStartPicker] = useState(false);
-  const [showEndPicker, setShowEndPicker] = useState(false);
+    const [activeFilters, setActiveFilters] = useState({});
+
+  // Fetch notifications
+  const fetchNotifications = async (filters = activeFilters) => {
+    try {
+      const data = await api.getNotifications(filters);
+  
+      // Convert important and other integer fields to boolean
+      const formattedData = data.map((item: Notification) => ({
+        ...item,
+        important: Boolean(item.important),
+        unread: Boolean(item.unread),
+        parcel: Boolean(item.parcel),
+      }));
+  
+      // console.log("Formatted notifications:", formattedData);
+      setNotifications(formattedData);
+    } catch (error) {
+      console.error("Error fetching notifications:", error);
+    }
+  };
+  
+
+  useEffect(() => {
+    fetchNotifications();
+  
+    const intervalId = setInterval(() => {
+      fetchNotifications();
+    }, 1000);
+  
+    return () => clearInterval(intervalId);
+  }, [activeFilters]);
 
   const openModal = (notification: Notification) => {
+    toggleUnread(notification.id);
     setNotifications((prev) =>
       prev.map((item) =>
         item === notification ? { ...item, unread: false } : item
@@ -107,68 +135,104 @@ export default function Recent() {
     setModalVisible(false);
   };
 
-  const deleteNotification = () => {
+  const deleteNotification = async () => {
     if (selectedNotification) {
-      setNotifications((prev) =>
-        prev.filter(
-          (notification) => notification.title !== selectedNotification.title
-        )
-      );
-      api.deleteNotification(selectedNotification.id);
-      closeModal();
+      try {
+        console.log(selectedNotification.id);
+        await api.deleteNotification(selectedNotification.id);
+        fetchNotifications();
+        closeModal();
+        alert("Notification deleted!");
+      } catch (error) {
+        console.error("Error deleting notification:", error);
+        alert("Failed to delete notification.");
+      }
     }
   };
 
+  const toggleUnread = async (id: number) => {
+    try {
+        const message = await api.toggleUnreadNotification(id);
+        console.log(message);
+
+        // Update the notifications state
+        setNotifications((prevNotifications) =>
+            prevNotifications.map((notification) =>
+                notification.id === id
+                    ? { ...notification, unread: !notification.unread }
+                    : notification
+            )
+        );
+    } catch (error: any) {
+        console.error("Error toggling unread status:", error.message);
+        alert(`Failed to toggle unread status: ${error.message}`);
+    }
+};
+
+  // const applyFilters = () => {
+  //   let filteredNotifications = initialNotifications;
+  //   if (importantFilter && unreadFilter && weatherFilter) {
+  //     filteredNotifications = filteredNotifications.filter(
+  //       (notification) =>
+  //         notification.unread ||
+  //         notification.important ||
+  //         notification.isWeather
+  //     );
+  //   } else if (importantFilter && unreadFilter) {
+  //     filteredNotifications = filteredNotifications.filter(
+  //       (notification) => notification.important || notification.unread
+  //     );
+  //   } else if (weatherFilter && unreadFilter) {
+  //     filteredNotifications = filteredNotifications.filter(
+  //       (notification) => notification.isWeather || notification.unread
+  //     );
+  //   } else if (importantFilter && weatherFilter) {
+  //     filteredNotifications = filteredNotifications.filter(
+  //       (notification) => notification.important || notification.isWeather
+  //     );
+  //   } else if (importantFilter) {
+  //     // Filter important notifications
+  //     filteredNotifications = filteredNotifications.filter(
+  //       (notification) => notification.important
+  //     );
+  //   } else if (unreadFilter) {
+  //     // Filter unread notifications
+  //     filteredNotifications = filteredNotifications.filter(
+  //       (notification) => notification.unread
+  //     );
+  //   } else if (weatherFilter) {
+  //     // Filter weather notifications
+  //     filteredNotifications = filteredNotifications.filter(
+  //       (notification) => notification.isWeather
+  //     );
+  //   }
+
+  //   // Filter by date range
+  //   if (startDate || endDate) {
+  //     filteredNotifications = filteredNotifications.filter((notification) => {
+  //       const notificationDate = new Date(notification.date).getTime();
+  //       const start = startDate ? startDate.getTime() : -Infinity;
+  //       const end = endDate ? endDate.getTime() : Infinity;
+  //       return notificationDate >= start && notificationDate <= end;
+  //     });
+  //   }
+
+  //   setNotifications(filteredNotifications);
+  //   setFilterModalVisible(false);
+  // };
+
   const applyFilters = () => {
-    let filteredNotifications = initialNotifications;
-    if (importantFilter && unreadFilter && weatherFilter) {
-      filteredNotifications = filteredNotifications.filter(
-        (notification) =>
-          notification.unread ||
-          notification.important ||
-          notification.isWeather
-      );
-    } else if (importantFilter && unreadFilter) {
-      filteredNotifications = filteredNotifications.filter(
-        (notification) => notification.important || notification.unread
-      );
-    } else if (weatherFilter && unreadFilter) {
-      filteredNotifications = filteredNotifications.filter(
-        (notification) => notification.isWeather || notification.unread
-      );
-    } else if (importantFilter && weatherFilter) {
-      filteredNotifications = filteredNotifications.filter(
-        (notification) => notification.important || notification.isWeather
-      );
-    } else if (importantFilter) {
-      // Filter important notifications
-      filteredNotifications = filteredNotifications.filter(
-        (notification) => notification.important
-      );
-    } else if (unreadFilter) {
-      // Filter unread notifications
-      filteredNotifications = filteredNotifications.filter(
-        (notification) => notification.unread
-      );
-    } else if (weatherFilter) {
-      // Filter weather notifications
-      filteredNotifications = filteredNotifications.filter(
-        (notification) => notification.isWeather
-      );
-    }
-
-    // Filter by date range
-    if (startDate || endDate) {
-      filteredNotifications = filteredNotifications.filter((notification) => {
-        const notificationDate = new Date(notification.date).getTime();
-        const start = startDate ? startDate.getTime() : -Infinity;
-        const end = endDate ? endDate.getTime() : Infinity;
-        return notificationDate >= start && notificationDate <= end;
-      });
-    }
-
-    setNotifications(filteredNotifications);
-    setFilterModalVisible(false);
+    const filters: any = {};
+    if (importantFilter) filters.important = 1;
+    if (unreadFilter) filters.unread = 1;
+    if (parcelFilter) filters.parcel = 1;
+    if (startDate) filters.start_date = startDate;
+    if (endDate) filters.end_date = endDate;
+  
+    // console.log("Applying filters:", filters);
+    setActiveFilters(filters); // Save the filters to state
+    fetchNotifications(filters); // Fetch notifications using the new filters
+    setFilterModalVisible(false); // Close the filter modal
   };
 
   return (
@@ -227,7 +291,7 @@ export default function Recent() {
                   />
                 ) : (
                   <Text style={styles.modalDetails}>
-                    {selectedNotification.details}
+                    {selectedNotification.title}
                   </Text>
                 )}
                 <Text style={styles.modalDate}>
@@ -238,7 +302,6 @@ export default function Recent() {
                     style={[styles.modalButton, styles.button]}
                     onPress={() => {
                       deleteNotification();
-                      alert("Notification deleted!");
                       closeModal();
                     }}
                   >
@@ -297,13 +360,13 @@ export default function Recent() {
               {/* Weather Filter */}
               <TouchableOpacity
                 style={styles.checkbox}
-                onPress={() => setWeatherFilter(!weatherFilter)}
+                onPress={() => setParcelFilter(!parcelFilter)}
               >
                 <MaterialIcons
-                  name={weatherFilter ? "check-box" : "check-box-outline-blank"}
+                  name={parcelFilter ? "check-box" : "check-box-outline-blank"}
                   style={styles.checkboxIcon}
                 />
-                <Text style={styles.checkboxLabel}>Weather</Text>
+                <Text style={styles.checkboxLabel}>Parcel</Text>
               </TouchableOpacity>
             </View>
 

@@ -2,12 +2,12 @@ import * as db from '../db/dboperations';
 import { Notification } from '../models/Notifications';
 
 export async function GetNotificationsByCategories(
-    important: number,
-    weather: number,
-    visitor: number,
-    parcel: number,
-    reminders: number,
-    unread: number,
+    important: number | null,
+    weather: number | null,
+    visitor: number | null,
+    parcel: number | null,
+    reminders: number | null,
+    unread: number | null,
     start_date: string,
     end_date: string
 ): Promise<Notification[]> {

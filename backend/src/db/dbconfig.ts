@@ -7,7 +7,7 @@ const config = {
     host: "localhost",
     user: "root",
     password: process.env.DB_PASSWORD,
-    database: "doorsense",
+    database: "Doorsence",
     connectionLimit: 5,
 };
 

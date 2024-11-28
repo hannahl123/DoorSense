@@ -12,7 +12,10 @@ import {
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 import { useTheme } from "@/components/ThemeContext";
 
+import * as api from "@/lib/api";
+
 export default function Settings() {
+  const [message, setMessage] = useState('');
   const styles = useStyles();
   const router = useExpoRouter();
   const { toggleTheme } = useTheme();
@@ -26,6 +29,15 @@ export default function Settings() {
     };
     loadPushNotifications();
   }, []);
+
+  const handleDelete = async () => {
+    try {
+        const result = await api.deleteAllNotifications();
+        setMessage(result); // Update the message state with API response
+    } catch (error) {
+        setMessage('Failed to delete notifications.');
+    }
+};
 
   return (
     <View style={styles.view}>
@@ -52,7 +64,10 @@ export default function Settings() {
         />
       </View>
       <TouchableOpacity
-          onPress={() => alert("Deleted all previous history.")}
+          onPress={() => {
+            handleDelete();
+            alert("Deleted all previous history.");
+          }}
         >
       <View style={styles.rect}>
         <Text style={styles.optionText}>DELETE ALL HISTORY</Text>
