@@ -3,7 +3,7 @@ import numpy as np
 import requests
 import tflite_runtime.interpreter as tflite
 import json
-import time
+from datetime import datetime
 
 # Backend API URL
 BACKEND_URL = "http://backend-server-url:port/api"
@@ -39,10 +39,10 @@ def send_detection_to_backend(class_name, confidence):
     payload = {
         "class": class_name,
         "confidence": confidence,
-        "timestamp": time.time()
+        "timestamp": str(datetime.now())
     }
     try:
-        response = requests.post(f"{BACKEND_URL}/detections", json=payload)
+        response = requests.post(f"{BACKEND_URL}/ai/detections", json=payload)
         if response.status_code == 200:
             print("Detection sent to backend successfully")
         else:
