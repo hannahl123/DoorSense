@@ -42,6 +42,7 @@ class RPiVideoStream:
                 return
 
             frame = cv2.resize(frame, (self.width, self.height))
+            frame = cv2.flip(frame, 1)
 
             # encode frame as JPEG
             _, buffer = cv2.imencode(".jpg", frame)
