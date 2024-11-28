@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, ScrollView } from "react-native";
+import { Image } from "expo-image";
 import { useStyles } from "@/constants/Styles";
-import { Video } from "expo-av";
-// import { useNotification } from '../../hooks/useNotification';
+import io from "socket.io-client";
 
 import * as api from "@/lib/api";
 
@@ -41,6 +41,7 @@ export default function Index() {
     }
     */
   ]);
+  const [currentFrame, setCurrentFrame] = useState<string | null>(null);
 
   function formatDateTimeToYYDDMM(dateString: string): { date: string; time: string } {
     const date = new Date(dateString);
@@ -95,17 +96,32 @@ export default function Index() {
     return () => clearInterval(intervalId); // Cleanup interval on unmount
   }, []);
 
+  useEffect(() => {
+    // establish WebSocket connection
+    const socket = io("http://10.20.104.1:8080", {
+      transports: ["websocket"],
+    });
+
+    // listen for incoming video frames
+    socket.on("video_stream", (data: string) => {
+      setCurrentFrame(`data:image/jpeg;base64,${data}`);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   return (
     <View style={styles.view}>
       <Text style={[styles.title, { paddingTop: "25%" }]}>DOORSENSE</Text>
       <Text style={[styles.header, { marginTop: "0%" }]}>LIVE</Text>
 
-      <Video
-        source={{ uri: "https://www.w3schools.com/html/mov_bbb.mp4" }}
+      <Image
+        source={{ uri: currentFrame }}
         style={styles.video}
-        useNativeControls
-        isLooping
-        onError={(e) => console.log("Error loading video:", e)}
+        // key={currentFrame} // Add key to force re-render
+        cachePolicy="memory-disk"
       />
 
       {/* Event Log */}
