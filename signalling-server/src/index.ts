@@ -29,8 +29,9 @@ class VideoStreamServer {
       console.log("New client connected with ID:", socket.id);
 
       // handle video stream from Raspberry Pi
-      socket.on("stream", (data) => {
-        this.io.emit("video_stream", data);
+      socket.on("incoming_video_stream", (data) => {
+        console.log("incoming video stream!");
+        this.io.emit("video_stream", data["frame"]);
       });
 
       // handle client disconnection
