@@ -5,7 +5,7 @@ from datetime import datetime
 
 door_sensor = ButtonSensor(16)
 
-BACKEND_URL = "http://10.20.98.169:3000/api"
+BACKEND_URL = "http://10.20.98.169:3000/ai/door"
 
 def send_detection_to_backend():
     payload = {
