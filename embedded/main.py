@@ -3,7 +3,7 @@ from modules.include import *
 import requests
 from datetime import datetime
 
-door_sensor = ButtonSensor(1)
+door_sensor = ButtonSensor(16)
 
 BACKEND_URL = "http://backend-server-url:port/api"
 
