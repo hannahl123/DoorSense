@@ -25,8 +25,8 @@ while run:
     door_change = door_sensor.update()
     if door_change:
         if door_sensor.state:
-            print("Door open at "+time.time())
+            print("Door open at " + str(time.time()))
             send_detection_to_backend()
 
         else:
-            print("Door close at "+time.time())
+            print("Door close at " + str(time.time()))
