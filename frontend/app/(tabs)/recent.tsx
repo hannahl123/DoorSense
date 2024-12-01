@@ -23,7 +23,7 @@ export default function Recent() {
     important: boolean;
     unread: boolean;
     isWeather: boolean;
-    parcel: boolean; 
+    parcel: boolean;
   };
 
   const initialNotifications: Notification[] = [
@@ -76,46 +76,47 @@ export default function Recent() {
     useState<Notification | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
 
-    // Filters
-    const [filterModalVisible, setFilterModalVisible] = useState(false);
-    const [importantFilter, setImportantFilter] = useState(false);
-    const [unreadFilter, setUnreadFilter] = useState(false);
-    const [parcelFilter, setParcelFilter] = useState(false);
-    const [startDate, setStartDate] = useState<Date | null>(null);
-    const [endDate, setEndDate] = useState<Date | null>(null);
-    const [showStartPicker, setShowStartPicker] = useState(false);
-    const [showEndPicker, setShowEndPicker] = useState(false);
+  // Filters
+  const [filterModalVisible, setFilterModalVisible] = useState(false);
+  const [importantFilter, setImportantFilter] = useState(false);
+  const [unreadFilter, setUnreadFilter] = useState(false);
+  const [parcelFilter, setParcelFilter] = useState(false);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [showStartPicker, setShowStartPicker] = useState(false);
+  const [showEndPicker, setShowEndPicker] = useState(false);
 
-    const [activeFilters, setActiveFilters] = useState({});
+  const [activeFilters, setActiveFilters] = useState({});
 
   // Fetch notifications
   const fetchNotifications = async (filters = activeFilters) => {
     try {
       const data = await api.getNotifications(filters);
-  
+
       // Convert important and other integer fields to boolean
-      const formattedData = data.map((item: Notification) => ({
+      let formattedData = data.map((item: Notification) => ({
         ...item,
         important: Boolean(item.important),
         unread: Boolean(item.unread),
         parcel: Boolean(item.parcel),
       }));
-  
+
+      formattedData.reverse();
+
       // console.log("Formatted notifications:", formattedData);
       setNotifications(formattedData);
     } catch (error) {
       console.error("Error fetching notifications:", error);
     }
   };
-  
 
   useEffect(() => {
     fetchNotifications();
-  
+
     const intervalId = setInterval(() => {
       fetchNotifications();
     }, 1000);
-  
+
     return () => clearInterval(intervalId);
   }, [activeFilters]);
 
@@ -152,22 +153,22 @@ export default function Recent() {
 
   const toggleUnread = async (id: number) => {
     try {
-        const message = await api.toggleUnreadNotification(id);
-        console.log(message);
+      const message = await api.toggleUnreadNotification(id);
+      console.log(message);
 
-        // Update the notifications state
-        setNotifications((prevNotifications) =>
-            prevNotifications.map((notification) =>
-                notification.id === id
-                    ? { ...notification, unread: !notification.unread }
-                    : notification
-            )
-        );
+      // Update the notifications state
+      setNotifications((prevNotifications) =>
+        prevNotifications.map((notification) =>
+          notification.id === id
+            ? { ...notification, unread: !notification.unread }
+            : notification
+        )
+      );
     } catch (error: any) {
-        console.error("Error toggling unread status:", error.message);
-        alert(`Failed to toggle unread status: ${error.message}`);
+      console.error("Error toggling unread status:", error.message);
+      alert(`Failed to toggle unread status: ${error.message}`);
     }
-};
+  };
 
   // const applyFilters = () => {
   //   let filteredNotifications = initialNotifications;
@@ -228,7 +229,7 @@ export default function Recent() {
     if (parcelFilter) filters.parcel = 1;
     if (startDate) filters.start_date = startDate;
     if (endDate) filters.end_date = endDate;
-  
+
     // console.log("Applying filters:", filters);
     setActiveFilters(filters); // Save the filters to state
     fetchNotifications(filters); // Fetch notifications using the new filters
