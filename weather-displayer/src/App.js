@@ -39,7 +39,7 @@ const HourlyBlock = ({ data }) => {
       </div>
       Feels {kelvinToCelsius(data.main.feels_like)}º
       <br />
-      🌧 {getPrecipitation(data)}mm
+      {getPrecipitation(data)}mm
     </div>
   );
 };
@@ -49,7 +49,7 @@ const MainScreen = ({ weatherData, toggleScreen, currentDate, currentTime }) => 
   const iconURL = `https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`;
 
   return (
-    <div className="App">
+    <div className="App" onClick={toggleScreen}>
       <div className="current-date">{currentDate}</div>
       <div className="current-time">{currentTime}</div>
       <div className="title">DOORSENSE</div>
@@ -71,9 +71,9 @@ const MainScreen = ({ weatherData, toggleScreen, currentDate, currentTime }) => 
           H: {kelvinToCelsius(currentWeather.main.temp_max)}º &nbsp; L:{" "}
           {kelvinToCelsius(currentWeather.main.temp_min)}º
           <br />
-          🌧 {getPrecipitation(currentWeather)}mm
+          {getPrecipitation(currentWeather)}mm
         </div>
-        <div className="float-arrow-right" onClick={toggleScreen}>
+        <div className="float-arrow-right">
           <div className="arrow-right"></div>
         </div>
       </div>
@@ -83,13 +83,13 @@ const MainScreen = ({ weatherData, toggleScreen, currentDate, currentTime }) => 
 
 const HourlyWeatherScreen = ({ weatherData, toggleScreen, currentDate, currentTime }) => {
   return (
-    <div className="App">
+    <div className="App" onClick={toggleScreen}>
       <div className="current-date">{currentDate}</div>
       <div className="current-time">{currentTime}</div>
       <div className="title">DOORSENSE</div>
       <br />
       <div className="float-container">
-        <div className="float-arrow-left" onClick={toggleScreen}>
+        <div className="float-arrow-left">
           <div className="arrow-left"></div>
         </div>
         {weatherData.list.slice(1, 6).map((data, index) => (
