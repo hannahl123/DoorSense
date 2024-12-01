@@ -1,0 +1,7 @@
+tensorflow
+numpy
+opencv-python-headless
+tflite-runtime
+requests
+scikit-learn
+Pillow
