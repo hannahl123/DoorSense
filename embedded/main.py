@@ -1,3 +1,4 @@
+import gpiozero as gpio
 from modules.include import *
 import requests
 from datetime import datetime
@@ -6,20 +7,18 @@ door_sensor = ButtonSensor(16)
 
 BACKEND_URL = "http://192.168.160.107:3000"
 
-
 def send_detection_to_backend():
-    payload = {"timestamp": str(datetime.now())}
+    payload = {
+        "timestamp": str(datetime.now())
+    }
     try:
-        response = requests.post(f"{BACKEND_URL}/door", json=payload)
+        response = requests.post(f"{BACKEND_URL}/ai/door", json=payload)
         if response.status_code == 200:
             print("Detection sent to backend successfully")
         else:
-            print(
-                f"Failed to send detection to backend. Status code: {response.status_code}"
-            )
+            print(f"Failed to send detection to backend. Status code: {response.status_code}")
     except requests.exceptions.RequestException as e:
         print(f"Error sending detection to backend: {e}")
-
 
 run = True
 while run:
