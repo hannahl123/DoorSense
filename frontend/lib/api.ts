@@ -18,7 +18,10 @@ export async function getActivities(limit?: number) {
     // console.log(`response.data: ${JSON.stringify(response.data)}`);
     return response.data;
   } catch (error: any) {
-    console.error(`Error experienced when fetching activities:\n`, error.response?.data || error.message);
+    console.error(
+      `Error experienced when fetching activities:\n`,
+      error.response?.data || error.message
+    );
     return [];
   }
 }
@@ -46,16 +49,16 @@ export async function getNotifications(filters: Record<string, any> = {}) {
   }
 }
 
-export async function deleteAllNotifications(){
+export async function deleteAllNotifications() {
   try {
-      const response = await axios.delete(`${API_ENDPOINT}/notifications`);
-      console.log(response.data.message);
-      return response.data.message; // Return the message for UI updates
+    const response = await axios.delete(`${API_ENDPOINT}/notifications`);
+    console.log(response.data.message);
+    return response.data.message; // Return the message for UI updates
   } catch (error) {
-      console.error('Error deleting notifications:', error);
-      throw error;
+    console.error("Error deleting notifications:", error);
+    throw error;
   }
-};
+}
 
 export async function deleteNotification(id: number) {
   try {
@@ -71,13 +74,17 @@ export async function deleteNotification(id: number) {
 
 export const toggleUnreadNotification = async (id: number): Promise<string> => {
   try {
-      const response = await axios.patch(`${API_ENDPOINT}/notifications/${id}/unread`);
-      return response.data.message; // Return the success message
+    const response = await axios.patch(
+      `${API_ENDPOINT}/notifications/${id}/mark-read`
+    );
+    return response.data.message; // Return the success message
   } catch (error: any) {
-      if (error.response) {
-          // Backend error responses
-          throw new Error(error.response.data.error || 'Failed to toggle unread status');
-      }
-      throw new Error('Network error or server is unreachable');
+    if (error.response) {
+      // Backend error responses
+      throw new Error(
+        error.response.data.error || "Failed to toggle unread status"
+      );
+    }
+    throw new Error("Network error or server is unreachable");
   }
 };

@@ -1,7 +1,7 @@
-import mariadb from 'mariadb';
-import config from './dbconfig';
-import {Notification} from '../models/Notifications';
-import {Activity} from '../models/Activity';
+import mariadb from "mariadb";
+import config from "./dbconfig";
+import { Notification } from "../models/Notifications";
+import { Activity } from "../models/Activity";
 
 const pool = mariadb.createPool(config);
 
@@ -35,19 +35,22 @@ export async function GetNotificationsbyCategories(
         `;
 
         // Use default dates if not provided
-        const results = await pool.query(
-            query,
-            [
-                important, important,
-                weather, weather,
-                visitor, visitor,
-                parcel, parcel,
-                reminders, reminders,
-                unread, unread,
-                start_date || defaultStartDate,
-                end_date || defaultEndDate,
-            ]
-        );
+        const results = await pool.query(query, [
+            important,
+            important,
+            weather,
+            weather,
+            visitor,
+            visitor,
+            parcel,
+            parcel,
+            reminders,
+            reminders,
+            unread,
+            unread,
+            start_date || defaultStartDate,
+            end_date || defaultEndDate,
+        ]);
 
         // console.log("Query results:", results);
 
@@ -108,7 +111,17 @@ export async function AddNotification(
             `
             INSERT INTO notifications (title, important, weather, visitor, parcel, reminders, unread, date, image) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [title, important, weather, visitor, parcel, reminders, unread, date, image]
+            [
+                title,
+                important,
+                weather,
+                visitor,
+                parcel,
+                reminders,
+                unread,
+                date,
+                image,
+            ]
         );
         const insertId = Number(result.insertId);
         console.log("Notification added with ID:", insertId);
@@ -119,7 +132,10 @@ export async function AddNotification(
     }
 }
 
-export async function AddActivity(activity: string, time: string): Promise<number> {
+export async function AddActivity(
+    activity: string,
+    time: string
+): Promise<number> {
     try {
         const result = await pool.query(
             `
@@ -136,7 +152,7 @@ export async function AddActivity(activity: string, time: string): Promise<numbe
     }
 }
 
-export async function deleteAllNotifications(): Promise<number>{
+export async function deleteAllNotifications(): Promise<number> {
     try {
         const result = await pool.query(
             `
@@ -168,7 +184,7 @@ export async function DeleteNotificationById(id: number): Promise<boolean> {
 }
 
 export async function GetNotificationsbyId(
-    id: number,
+    id: number
 ): Promise<Notification[]> {
     try {
         const results = await pool.query(
@@ -199,7 +215,6 @@ export async function GetNotificationsbyId(
     }
 }
 
-
 export async function ToggleUnread(id: number): Promise<boolean> {
     try {
         const [notification] = await pool.query(
@@ -228,6 +243,24 @@ export async function ToggleUnread(id: number): Promise<boolean> {
         console.log(
             `Notification with ID ${id} unread property toggled to ${newUnreadValue}.`
         );
+        return result.affectedRows > 0;
+    } catch (err) {
+        console.error("Database query error:", err);
+        throw err;
+    }
+}
+
+export async function MarkRead(id: number): Promise<boolean> {
+    try {
+        const result = await pool.query(
+            `
+            UPDATE notifications 
+            SET unread = 0 
+            WHERE id = ?`,
+            [id]
+        );
+
+        console.log(`Notification with ID ${id} set to read.`);
         return result.affectedRows > 0;
     } catch (err) {
         console.error("Database query error:", err);

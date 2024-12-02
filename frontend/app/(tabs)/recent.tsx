@@ -296,7 +296,7 @@ export default function Recent() {
                   </Text>
                 )}
                 <Text style={styles.modalDate}>
-                  Date: {selectedNotification.date}
+                  Date: {new Date(selectedNotification.date).toLocaleString()}
                 </Text>
                 <View style={styles.modalActions}>
                   <TouchableOpacity

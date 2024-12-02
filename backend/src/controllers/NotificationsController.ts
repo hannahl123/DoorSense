@@ -1,5 +1,5 @@
-import * as db from '../db/dboperations';
-import { Notification } from '../models/Notifications';
+import * as db from "../db/dboperations";
+import { Notification } from "../models/Notifications";
 
 export async function GetNotificationsByCategories(
     important: number | null,
@@ -19,7 +19,7 @@ export async function GetNotificationsByCategories(
         reminders,
         unread,
         start_date,
-        end_date,
+        end_date
     );
 }
 
@@ -32,9 +32,19 @@ export async function AddNotification(
     reminders: number,
     unread: number,
     date: string,
-    image: Buffer | null,
+    image: Buffer | null
 ): Promise<number> {
-    return await db.AddNotification(title, important, weather, visitor, parcel, reminders, unread, date, image);
+    return await db.AddNotification(
+        title,
+        important,
+        weather,
+        visitor,
+        parcel,
+        reminders,
+        unread,
+        date,
+        image
+    );
 }
 
 export async function DeleteAllNotifications(): Promise<number> {
@@ -51,8 +61,10 @@ export async function GetNotificationsById(
     return await db.GetNotificationsbyId(id);
 }
 
-export async function ToggleUnread(
-    id: number
-): Promise<boolean> {
+export async function ToggleUnread(id: number): Promise<boolean> {
     return await db.ToggleUnread(id);
+}
+
+export async function markRead(id: number): Promise<boolean> {
+    return await db.MarkRead(id);
 }
