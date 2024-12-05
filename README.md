@@ -8,12 +8,3 @@ npm install cors
 npm install multer
 npm install --save-dev @types/multer
 ```
-
-```C
-// C as Cat
-
-meow meow meow
-meow meow
-meow
-
-```
